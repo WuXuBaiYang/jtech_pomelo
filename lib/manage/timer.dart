@@ -13,8 +13,8 @@ typedef OnCountDownTimerCallback = void Function(
 
 /*
 * 计时器管理
-* @author jtechjh
-* @Time 2021/8/4 5:08 下午
+* @author JTech JH
+* @Time 2022/3/18 9:22
 */
 class JTimer extends BaseManage {
   static final JTimer _instance = JTimer._internal();

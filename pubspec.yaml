@@ -23,6 +23,12 @@ dependencies:
   # 日志
   logger: ^1.1.0
 
+  # 权限管理
+  permission_handler: ^9.2.0
+
+  # 消息提示管理
+  fluttertoast: ^8.0.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -17,3 +17,5 @@ export 'utils/data_util.dart';
 export 'utils/match_util.dart';
 export 'utils/file_util.dart';
 export 'utils/log_util.dart';
+export 'utils/permission_util.dart';
+export 'utils/toast_util.dart';
