@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/jtech_pomelo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,8 +33,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text("aaa"),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text("弹窗测试"),
+          onPressed: () {
+            JDialogUtil.showInLoading(
+              context,
+              onLoading: () async {
+                await Future.delayed(Duration(milliseconds: 2000));
+                return "aaaaa";
+              },
+            ).then((value) {
+              print(value);
+              // Navigator.pop(context);
+            });
+          },
+        ),
       ),
     );
   }

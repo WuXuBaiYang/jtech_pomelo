@@ -1,4 +1,5 @@
 import 'package:crypto/crypto.dart' as crypto;
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart' as path;
 import 'dart:convert';
 import 'dart:math';
@@ -24,6 +25,18 @@ class JUtil {
   //计算md5
   static String md5(String value) =>
       crypto.md5.convert(utf8.encode(value)).toString();
+
+  //获取屏幕宽度
+  static double getScreenWith(BuildContext context) =>
+      MediaQuery.of(context).size.width;
+
+  //获取屏幕高度
+  static double getScreenHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height;
+
+  //获取状态栏高度
+  static double getStatusBarHeight(BuildContext context) =>
+      MediaQuery.of(context).padding.top;
 }
 
 //判断当前是否为debug状态
