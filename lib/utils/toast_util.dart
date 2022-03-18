@@ -52,21 +52,26 @@ class JToastUtil {
     String message, {
     bool? shortToast,
     bool? centerToast,
-    int? timeInSecForIosWeb = 1,
-    Color? backgroundColor = Colors.black54,
-    Color? textColor = Colors.white,
-    double? fontSize = 16,
+    int? timeInSecForIosWeb,
+    Color? backgroundColor,
+    Color? textColor,
+    double? fontSize,
   }) {
+    //赋默认值
     shortToast ??= true;
     centerToast ??= false;
+    timeInSecForIosWeb ??= 1;
+    backgroundColor ??= Colors.black54;
+    textColor ??= Colors.white;
+    fontSize ??= 16;
     return Fluttertoast.showToast(
       msg: message,
       gravity: centerToast ? ToastGravity.CENTER : ToastGravity.BOTTOM,
       toastLength: shortToast ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG,
-      timeInSecForIosWeb: timeInSecForIosWeb ?? 1,
-      backgroundColor: backgroundColor ?? Colors.black54,
-      textColor: textColor ?? Colors.white,
-      fontSize: fontSize ?? 16,
+      timeInSecForIosWeb: timeInSecForIosWeb,
+      backgroundColor: backgroundColor,
+      textColor: textColor,
+      fontSize: fontSize,
     );
   }
 }
