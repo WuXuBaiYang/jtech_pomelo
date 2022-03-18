@@ -57,7 +57,7 @@ class JToastUtil {
     Color? textColor,
     double? fontSize,
   }) {
-    //赋默认值
+    //默认值
     shortToast ??= true;
     centerToast ??= false;
     timeInSecForIosWeb ??= 1;

@@ -54,7 +54,7 @@ class JOverlay extends BaseManage {
     Rect? rect,
     double? targetSpace,
   }) {
-    //赋默认值
+    //默认值
     size ??= Size.zero;
     rect ??= Rect.zero;
     targetSpace ??= 6;
