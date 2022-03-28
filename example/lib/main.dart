@@ -37,16 +37,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ElevatedButton(
           child: const Text("弹窗测试"),
           onPressed: () {
-            JDialogUtil.showInLoading(
+            JSheetUtil.showAppBar(
               context,
-              onLoading: () async {
-                await Future.delayed(Duration(milliseconds: 2000));
-                return "aaaaa";
+              appBar: AppBar(
+                title: Text("标题"),
+                leading: Icon(Icons.close),
+              ),
+              builder: (_) {
+                return Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text("aaaaaaaaaaaa"),
+                );
               },
-            ).then((value) {
-              print(value);
-              // Navigator.pop(context);
-            });
+            );
           },
         ),
       ),

@@ -19,6 +19,7 @@ class JDialogUtil {
   static Future<T?> showInLoading<T>(
     BuildContext context, {
     required OnLoading<T> onLoading,
+    //通用参数
     bool? barrierDismissible,
     Color? barrierColor,
     bool? useSafeArea,
@@ -37,6 +38,7 @@ class JDialogUtil {
   //展示等待弹窗
   static Future<void> showLoading(
     BuildContext context, {
+    //通用参数
     bool? barrierDismissible,
     Color? barrierColor,
     bool? useSafeArea,
@@ -73,6 +75,7 @@ class JDialogUtil {
     bool? centerTitle,
     double? maxRatio,
     EdgeInsetsGeometry? padding,
+    //通用参数
     bool? barrierDismissible,
     Color? barrierColor,
     bool? useSafeArea,
@@ -88,43 +91,41 @@ class JDialogUtil {
       barrierDismissible: barrierDismissible,
       barrierColor: barrierColor,
       useSafeArea: useSafeArea,
-      builder: (_) {
-        return Center(
-          child: Card(
-            child: Container(
-              padding: padding,
-              constraints: BoxConstraints(
-                maxHeight: maxHeight,
-                maxWidth: maxWidth,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DefaultTextStyle(
-                    child: title ?? const EmptyBox(),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
+      builder: (_) => Center(
+        child: Card(
+          child: Container(
+            padding: padding,
+            constraints: BoxConstraints(
+              maxHeight: maxHeight,
+              maxWidth: maxWidth,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DefaultTextStyle(
+                  child: title ?? const EmptyBox(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
                   ),
-                  DefaultTextStyle(
-                    child: content,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                    ),
+                ),
+                DefaultTextStyle(
+                  child: content,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: actions,
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: actions,
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -140,7 +141,7 @@ class JDialogUtil {
     barrierDismissible ??= true;
     barrierColor ??= Colors.black54;
     useSafeArea ??= true;
-    return showDialog(
+    return showDialog<T>(
       context: context,
       builder: builder,
       barrierDismissible: barrierDismissible,

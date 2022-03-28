@@ -6,6 +6,9 @@ export 'base/base_model.dart';
 export 'base/base_page.dart';
 export 'base/base_widget.dart';
 
+//预设实体类
+export 'model/menu_item.dart';
+
 //管理方法实现
 export 'manage/event.dart';
 export 'manage/overlay.dart';
@@ -15,6 +18,7 @@ export 'manage/timer.dart';
 //工具方法
 export 'util/data_util.dart';
 export 'util/dialog_util.dart';
+export 'util/sheet_util.dart';
 export 'util/file_util.dart';
 export 'util/log_util.dart';
 export 'util/match_util.dart';
