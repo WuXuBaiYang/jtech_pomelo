@@ -1,4 +1,4 @@
-import 'package:jtech_pomelo/jtech_pomelo.dart';
+import 'package:jtech_pomelo/pomelo.dart';
 import 'package:logger/logger.dart';
 
 /*

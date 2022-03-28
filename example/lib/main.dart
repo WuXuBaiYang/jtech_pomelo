@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jtech_pomelo/jtech_pomelo.dart';
+import 'package:jtech_pomelo/pomelo.dart';
 
 void main() {
   runApp(const MyApp());
