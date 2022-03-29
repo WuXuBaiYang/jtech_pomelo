@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 
-import '../base/base_manage.dart';
 import '../util/data_util.dart';
 import '../util/util.dart';
 
@@ -16,18 +15,12 @@ typedef OnCountDownTimerCallback = void Function(
 * @author JTech JH
 * @Time 2022/3/18 9:22
 */
-class JTimer extends BaseManage {
-  static final JTimer _instance = JTimer._internal();
-
-  factory JTimer() => _instance;
-
-  JTimer._internal();
-
+class JTimerUtil {
   //缓存计时器
-  final Map<String, Timer> cacheTimers = {};
+  static final Map<String, Timer> cacheTimers = {};
 
   //启动一个循环计时器
-  String? periodic({
+  static String? periodic({
     String? key,
     required Duration duration,
     required OnTimerCallback callback,
@@ -41,7 +34,7 @@ class JTimer extends BaseManage {
   }
 
   //启动一个倒计时
-  String? countdown({
+  static String? countdown({
     String? key,
     required Duration maxDuration,
     Duration tickDuration = const Duration(seconds: 1),
@@ -68,7 +61,7 @@ class JTimer extends BaseManage {
   }
 
   //启动一个区间计时器
-  String? inTime({
+  static String? inTime({
     String? key,
     required Duration duration,
     required VoidCallback callback,
@@ -82,7 +75,7 @@ class JTimer extends BaseManage {
   }
 
   //在目标时间提醒
-  String? onTime({
+  static String? onTime({
     String? key,
     required DateTime dateTime,
     required VoidCallback callback,
@@ -93,20 +86,17 @@ class JTimer extends BaseManage {
       );
 
   //获取一个计时器
-  Timer? getTimer(String key) => cacheTimers[key];
+  static Timer? getTimer(String key) => cacheTimers[key];
 
   //判断目标计时器是否活动
-  bool isActive(String key) => getTimer(key)?.isActive ?? false;
+  static bool isActive(String key) => getTimer(key)?.isActive ?? false;
 
   //取消指定计时器
-  void cancel(String key) => cacheTimers.remove(key)?.cancel();
+  static void cancel(String key) => cacheTimers.remove(key)?.cancel();
 
   //取消所有计时器
-  void cancelAll() => cacheTimers.removeWhere((key, value) {
+  static void cancelAll() => cacheTimers.removeWhere((key, value) {
         value.cancel();
         return true;
       });
 }
-
-//单例调用
-final jTimer = JTimer();
