@@ -28,6 +28,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+
+    jNotification.init();
+
+    jNotification.initNotification("app_icon");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,21 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text("弹窗测试"),
+          child: const Text("测试"),
           onPressed: () {
-            JSheetUtil.showAppBar(
-              context,
-              appBar: AppBar(
-                title: Text("标题"),
-                leading: Icon(Icons.close),
-              ),
-              builder: (_) {
-                return Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text("aaaaaaaaaaaa"),
-                );
-              },
-            );
           },
         ),
       ),

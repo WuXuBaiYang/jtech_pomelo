@@ -7,11 +7,14 @@ export 'base/base_page.dart';
 export 'base/base_widget.dart';
 
 //预设实体类
+export 'model/notification/android_config.dart';
+export 'model/notification/ios_config.dart';
 export 'model/menu_item.dart';
 
 //管理方法实现
 export 'manage/cache.dart';
 export 'manage/event.dart';
+export 'manage/notification.dart';
 export 'manage/router.dart';
 
 //工具方法
