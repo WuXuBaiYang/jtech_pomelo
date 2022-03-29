@@ -135,7 +135,7 @@ class JSheetUtil {
                 : null,
             onTap: () {
               onItemTap?.call(item.id, i);
-              Navigator.pop(context, item.id);
+              Navigator.pop(context, item.id ?? "$i");
             },
           );
         },

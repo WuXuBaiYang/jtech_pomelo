@@ -28,7 +28,7 @@ class JPermissionUtil {
     }
     if (failResults.isEmpty) return true;
     if (null != onCheckFail) {
-      onCheckFail.call(failResults);
+      onCheckFail(failResults);
     } else {
       var message = failResults.map<String>((e) => e.message).join(";");
       JToastUtil.show(message);
@@ -39,17 +39,326 @@ class JPermissionUtil {
   //检查日历权限
   static Future<bool> checkCalendar(
     BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
     String? requestMessage,
     String? requestFail,
-  }) async {
-    var result = await PermissionRequest.calendar(
-      requestMessage: requestMessage,
-      requestFail: requestFail,
-    ).request();
-    return result.isGranted;
-  }
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.calendar(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
 
-  ///待完成
+  //检查摄像头权限
+  static Future<bool> checkCamera(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.camera(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查通讯录权限
+  static Future<bool> checkContacts(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.contacts(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查定位权限
+  static Future<bool> checkLocation(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.location(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查麦克风权限
+  static Future<bool> checkMicrophone(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.microphone(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查传感器权限
+  static Future<bool> checkSensors(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.sensors(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查麦克风权限
+  static Future<bool> checkSpeech(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.speech(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查存储权限
+  static Future<bool> checkStorage(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.storage(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查通知权限
+  static Future<bool> checkNotification(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.notification(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查蓝牙权限
+  static Future<bool> checkBluetooth(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.bluetooth(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查ios媒体库权限
+  static Future<bool> checkIosMediaLibrary(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.iosMediaLibrary(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查ios图片库权限
+  static Future<bool> checkIosPhotos(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.iosPhotos(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查ios提醒事项权限
+  static Future<bool> checkIosReminders(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.iosReminders(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查android外部存储权限
+  static Future<bool> checkAndroidManageExternalStorage(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.androidManageExternalStorage(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查android系统通知权限
+  static Future<bool> checkAndroidSystemAlertWindow(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.androidSystemAlertWindow(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查android安装包权限
+  static Future<bool> checkAndroidRequestInstallPackages(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.androidRequestInstallPackages(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查android短信权限
+  static Future<bool> checkAndroidSms(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.androidSms(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
+
+  //检查android拨打电话权限
+  static Future<bool> checkAndroidPhone(
+    BuildContext context, {
+    OnPermissionCheckFail? onCheckFail,
+    String? requestMessage,
+    String? requestFail,
+  }) =>
+      checkAllGranted(
+        context,
+        permissions: [
+          PermissionRequest.androidPhone(
+            requestMessage: requestMessage,
+            requestFail: requestFail,
+          )
+        ],
+        onCheckFail: onCheckFail,
+      );
 }
 
 /*

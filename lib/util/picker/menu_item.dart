@@ -18,7 +18,6 @@ class PickerMenuItem extends MenuItem {
     this.allowedExtensions,
     //基础参数
     required String text,
-    String? id,
     bool enable = true,
     String? subText,
     Widget? icon,
@@ -29,7 +28,6 @@ class PickerMenuItem extends MenuItem {
             "当选择自定义附件类型时，allowedExtensions 参数不能为空"),
         super(
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,
@@ -38,14 +36,12 @@ class PickerMenuItem extends MenuItem {
   //图片选择
   PickerMenuItem.image({
     required String text,
-    dynamic id,
     bool enable = true,
     String? subText,
     Widget? icon,
   }) : this(
           type: PickerType.image,
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,
@@ -54,14 +50,12 @@ class PickerMenuItem extends MenuItem {
   //图片拍摄
   PickerMenuItem.imageTake({
     required String text,
-    dynamic id,
     bool enable = true,
     String? subText,
     Widget? icon,
   }) : this(
           type: PickerType.imageTake,
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,
@@ -70,14 +64,12 @@ class PickerMenuItem extends MenuItem {
   //视频选择
   PickerMenuItem.video({
     required String text,
-    dynamic id,
     bool enable = true,
     String? subText,
     Widget? icon,
   }) : this(
           type: PickerType.video,
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,
@@ -86,14 +78,12 @@ class PickerMenuItem extends MenuItem {
   //视频录制
   PickerMenuItem.videoRecord({
     required String text,
-    dynamic id,
     bool enable = true,
     String? subText,
     Widget? icon,
   }) : this(
           type: PickerType.videoRecord,
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,
@@ -103,7 +93,6 @@ class PickerMenuItem extends MenuItem {
   PickerMenuItem.custom({
     required String text,
     required List<String> allowedExtensions,
-    dynamic id,
     bool enable = true,
     String? subText,
     Widget? icon,
@@ -111,7 +100,6 @@ class PickerMenuItem extends MenuItem {
           type: PickerType.custom,
           allowedExtensions: allowedExtensions,
           text: text,
-          id: id,
           enable: enable,
           subText: subText,
           icon: icon,

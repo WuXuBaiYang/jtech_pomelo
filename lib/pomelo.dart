@@ -26,6 +26,9 @@ export 'net/response.dart';
 
 
 //工具方法
+export 'util/picker/file_info.dart';
+export 'util/picker/menu_item.dart';
+export 'util/picker/picker_util.dart';
 export 'util/data_util.dart';
 export 'util/dialog_util.dart';
 export 'util/file_util.dart';
