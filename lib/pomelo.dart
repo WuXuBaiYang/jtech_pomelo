@@ -19,8 +19,10 @@ export 'model/menu_item.dart';
 
 //网络模块方法
 export 'net/api_cancel.dart';
+export 'net/base_api.dart';
 export 'net/request.dart';
 export 'net/response.dart';
+
 
 //工具方法
 export 'util/data_util.dart';
@@ -38,3 +40,6 @@ export 'util/util.dart';
 
 //组件
 export 'widget/empty_box.dart';
+
+//内部依赖包导出
+export "package:dio/dio.dart";

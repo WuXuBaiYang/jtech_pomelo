@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/pomelo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,9 +41,29 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ElevatedButton(
           child: const Text("测试"),
-          onPressed: () {},
+          onPressed: () {
+
+          },
         ),
       ),
+    );
+  }
+}
+
+class JAPI extends BaseJAPI {
+  JAPI({required baseUrl}) : super(baseUrl: baseUrl);
+
+  @override
+  ResponseModel<T> handleResponse<T>(Response? response) {
+    if (response?.statusCode != 200) {
+      throw Exception(response?.statusMessage);
+    }
+    var result = response?.data;
+    return ResponseModel(
+      code: result["code"],
+      message: result["msg"],
+      data: result["data"],
+      success: result["code"] == 0,
     );
   }
 }

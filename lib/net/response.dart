@@ -7,7 +7,7 @@ import '../base/base_model.dart';
 */
 class ResponseModel<T> extends BaseModel {
   //状态码
-  final String code;
+  final dynamic code;
 
   //描述
   final String message;
