@@ -4,7 +4,6 @@ import 'package:jtech_pomelo/base/base_model.dart';
 import 'package:jtech_pomelo/util/toast_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 //回调请求失败的请求
 typedef OnPermissionCheckFail = void Function(
     List<PermissionResult> failRequests);
@@ -36,6 +35,21 @@ class JPermissionUtil {
     }
     return false;
   }
+
+  //检查日历权限
+  static Future<bool> checkCalendar(
+    BuildContext context, {
+    String? requestMessage,
+    String? requestFail,
+  }) async {
+    var result = await PermissionRequest.calendar(
+      requestMessage: requestMessage,
+      requestFail: requestFail,
+    ).request();
+    return result.isGranted;
+  }
+
+  ///待完成
 }
 
 /*
@@ -62,111 +76,147 @@ class PermissionRequest extends BaseModel {
 
   //日历权限
   PermissionRequest.calendar({
-    this.requestMessage = "请求日历权限",
-    this.requestFail = "日历权限请求失败",
-  }) : _permission = Permission.calendar;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.calendar,
+        requestMessage = requestMessage ?? "请求日历权限",
+        requestFail = requestFail ?? "日历权限请求失败";
 
   //摄像头权限
   PermissionRequest.camera({
-    this.requestMessage = "请求摄像头权限",
-    this.requestFail = "摄像头权限请求失败",
-  }) : _permission = Permission.camera;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.camera,
+        requestMessage = requestMessage ?? "请求摄像头权限",
+        requestFail = requestFail ?? "摄像头权限请求失败";
 
   //请求通讯录权限
   PermissionRequest.contacts({
-    this.requestMessage = "请求通讯录权限",
-    this.requestFail = "通讯录权限请求失败",
-  }) : _permission = Permission.contacts;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.contacts,
+        requestMessage = requestMessage ?? "请求通讯录权限",
+        requestFail = requestFail ?? "通讯录权限请求失败";
 
   //请求定位权限(locationAlways、locationWhenInUse)
   PermissionRequest.location({
-    this.requestMessage = "请求定位权限",
-    this.requestFail = "定位权限请求失败",
-  }) : _permission = Permission.location;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.location,
+        requestMessage = requestMessage ?? "请求定位权限",
+        requestFail = requestFail ?? "定位权限请求失败";
 
   //请求麦克风权限
   PermissionRequest.microphone({
-    this.requestMessage = "请求麦克风权限",
-    this.requestFail = "麦克风权限请求失败",
-  }) : _permission = Permission.microphone;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.microphone,
+        requestMessage = requestMessage ?? "请求麦克风权限",
+        requestFail = requestFail ?? "麦克风权限请求失败";
 
   //请求传感器权限
   PermissionRequest.sensors({
-    this.requestMessage = "请求传感器权限",
-    this.requestFail = "传感器权限请求失败",
-  }) : _permission = Permission.sensors;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.sensors,
+        requestMessage = requestMessage ?? "请求传感器权限",
+        requestFail = requestFail ?? "传感器权限请求失败";
 
   //请求麦克风权限
   PermissionRequest.speech({
-    this.requestMessage = "请求麦克风权限",
-    this.requestFail = "麦克风权限请求失败",
-  }) : _permission = Permission.speech;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.speech,
+        requestMessage = requestMessage ?? "请求麦克风权限",
+        requestFail = requestFail ?? "麦克风权限请求失败";
 
   //请求存储权限
   PermissionRequest.storage({
-    this.requestMessage = "请求存储权限",
-    this.requestFail = "存储权限请求失败",
-  }) : _permission = Permission.storage;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.storage,
+        requestMessage = requestMessage ?? "请求存储权限",
+        requestFail = requestFail ?? "存储权限请求失败";
 
   //请求通知权限
   PermissionRequest.notification({
-    this.requestMessage = "请求通知权限",
-    this.requestFail = "通知权限请求失败",
-  }) : _permission = Permission.notification;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.notification,
+        requestMessage = requestMessage ?? "请求通知权限",
+        requestFail = requestFail ?? "通知权限请求失败";
 
   //请求蓝牙权限
   PermissionRequest.bluetooth({
-    this.requestMessage = "请求蓝牙权限",
-    this.requestFail = "蓝牙权限请求失败",
-  }) : _permission = Permission.bluetooth;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.bluetooth,
+        requestMessage = requestMessage ?? "请求蓝牙权限",
+        requestFail = requestFail ?? "蓝牙权限请求失败";
 
   //请求媒体库权限
   PermissionRequest.iosMediaLibrary({
-    this.requestMessage = "请求媒体库权限",
-    this.requestFail = "媒体库权限请求失败",
-  }) : _permission = Permission.mediaLibrary;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.mediaLibrary,
+        requestMessage = requestMessage ?? "请求媒体库权限",
+        requestFail = requestFail ?? "媒体库权限请求失败";
 
   //请求图片库权限
   PermissionRequest.iosPhotos({
-    this.requestMessage = "请求图片库权限",
-    this.requestFail = "图片库权限请求失败",
-  }) : _permission = Permission.photos;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.photos,
+        requestMessage = requestMessage ?? "请求图片库权限",
+        requestFail = requestFail ?? "图片库权限请求失败";
 
   //请求提醒事项权限
   PermissionRequest.iosReminders({
-    this.requestMessage = "请求提醒事项权限",
-    this.requestFail = "提醒事项权限请求失败",
-  }) : _permission = Permission.reminders;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.reminders,
+        requestMessage = requestMessage ?? "请求提醒事项权限",
+        requestFail = requestFail ?? "提醒事项权限请求失败";
 
   //请求外部存储权限
   PermissionRequest.androidManageExternalStorage({
-    this.requestMessage = "请求外部存储权限",
-    this.requestFail = "外部存储权限请求失败",
-  }) : _permission = Permission.bluetooth;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.bluetooth,
+        requestMessage = requestMessage ?? "请求外部存储权限",
+        requestFail = requestFail ?? "外部存储权限请求失败";
 
   //请求系统通知权限
   PermissionRequest.androidSystemAlertWindow({
-    this.requestMessage = "请求系统通知权限",
-    this.requestFail = "系统通知权限请求失败",
-  }) : _permission = Permission.systemAlertWindow;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.systemAlertWindow,
+        requestMessage = requestMessage ?? "请求系统通知权限",
+        requestFail = requestFail ?? "系统通知权限请求失败";
 
   //请求安装包权限
   PermissionRequest.androidRequestInstallPackages({
-    this.requestMessage = "请求安装包权限",
-    this.requestFail = "安装包权限请求失败",
-  }) : _permission = Permission.requestInstallPackages;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.requestInstallPackages,
+        requestMessage = requestMessage ?? "请求安装包权限",
+        requestFail = requestFail ?? "安装包权限请求失败";
 
   //请求短信权限
   PermissionRequest.androidSms({
-    this.requestMessage = "请求短信权限",
-    this.requestFail = "短信权限请求失败",
-  }) : _permission = Permission.sms;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.sms,
+        requestMessage = requestMessage ?? "请求短信权限",
+        requestFail = requestFail ?? "短信权限请求失败";
 
   //请求拨打电话权限
   PermissionRequest.androidPhone({
-    this.requestMessage = "请求拨打电话权限",
-    this.requestFail = "拨打电话权限请求失败",
-  }) : _permission = Permission.phone;
+    String? requestMessage,
+    String? requestFail,
+  })  : _permission = Permission.phone,
+        requestMessage = requestMessage ?? "请求拨打电话权限",
+        requestFail = requestFail ?? "拨打电话权限请求失败";
 }
 
 /*

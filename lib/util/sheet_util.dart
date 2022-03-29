@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/model/menu_item.dart';
 
 //菜单项点击事件
-typedef OnMenuItemTap = void Function(String id);
+typedef OnMenuItemTap = void Function(String? id, int i);
 
 /*
 * 底部弹出工具方法
@@ -134,9 +134,8 @@ class JSheetUtil {
                 ? Text(item.subText!, style: subTitleStyle)
                 : null,
             onTap: () {
-              var id = item.id ?? "$i";
-              onItemTap?.call(id);
-              Navigator.pop(context, id);
+              onItemTap?.call(item.id, i);
+              Navigator.pop(context, item.id);
             },
           );
         },

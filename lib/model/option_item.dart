@@ -7,7 +7,7 @@ import 'package:jtech_pomelo/base/base_model.dart';
 */
 class OptionItem extends BaseModel {
   //id
-  final dynamic id;
+  final String? id;
 
   //文本
   final String text;

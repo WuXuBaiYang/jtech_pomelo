@@ -38,6 +38,12 @@ dependencies:
   # 网络请求框架
   dio: ^4.0.4
 
+  # 附件选择
+  file_picker: ^4.5.1
+
+  # 图片视频选择
+  image_picker: ^0.8.4+11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

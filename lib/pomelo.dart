@@ -15,6 +15,7 @@ export 'manage/event.dart';
 export 'manage/router.dart';
 
 //实体类
+export 'model/menu_item.dart';
 export 'model/option_item.dart';
 
 //网络模块方法
@@ -32,7 +33,7 @@ export 'util/log_util.dart';
 export 'util/match_util.dart';
 export 'util/overlay_util.dart';
 export 'util/permission_util.dart';
-export 'util/sheet/sheet_util.dart';
+export 'util/sheet_util.dart';
 export 'util/snack_util.dart';
 export 'util/timer_util.dart';
 export 'util/toast_util.dart';

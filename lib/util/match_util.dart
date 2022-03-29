@@ -5,12 +5,32 @@
 */
 class JMatchUtil {
   //判断是否存在匹配内容
-  bool hasMatch(Pattern pattern, {required String string}) =>
+  static bool hasMatch(Pattern pattern, {required String string}) =>
       match(pattern, string: string).isNotEmpty;
 
   //匹配所有内容
-  Iterable<Match> match(Pattern pattern, {required String string}) =>
+  static Iterable<Match> match(Pattern pattern, {required String string}) =>
       pattern.allMatches(string);
+
+  //判断是否为手机号格式
+  static bool isPhoneNumber_86(String string) =>
+      hasMatch(JMatchReg.phoneNumber_86, string: string);
+
+  //判断是否为邮箱格式
+  static bool isEmailAddress(String string) =>
+      hasMatch(JMatchReg.emailAddress, string: string);
+
+  //判断是否为身份证格式
+  static bool isIdCard(String string) =>
+      hasMatch(JMatchReg.idCard, string: string);
+
+  //判断是否为图片文件格式
+  static bool isImageFile(String string) =>
+      hasMatch(JMatchReg.imageFileType, string: string);
+
+  //判断是否为视频文件格式
+  static bool isVideoFile(String string) =>
+      hasMatch(JMatchReg.videoFileType, string: string);
 }
 
 /*
@@ -36,8 +56,4 @@ class JMatchReg {
 
   //文件类型匹配-视频
   static const videoFileType = r'mp4|avi|wmv|mpg|mpeg|mov|rm|ram|swf|flv';
-
-  //文件类型匹配-音频
-  static const audioFileType =
-      r'opus|flac|webm|weba|wav|ogg|m4a|mp3|oga|mid|amr|aiff|wma|au|aac';
 }

@@ -15,7 +15,7 @@ class MenuItem extends OptionItem {
 
   MenuItem({
     required String text,
-    dynamic id,
+    String? id,
     bool enable = true,
     //基础参数
     this.subText,
