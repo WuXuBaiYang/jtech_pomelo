@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jtech_pomelo/pomelo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,10 +29,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    jNotification.init();
-
-    jNotification.initNotification("app_icon");
   }
 
   @override
@@ -45,8 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ElevatedButton(
           child: const Text("测试"),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
       ),
     );

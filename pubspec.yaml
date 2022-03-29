@@ -35,6 +35,9 @@ dependencies:
   # 本地通知栏管理
   flutter_local_notifications: ^9.4.0
 
+  # 网络请求框架
+  dio: ^4.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

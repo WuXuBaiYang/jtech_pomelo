@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:jtech_pomelo/model/notification/android_config.dart';
-import 'package:jtech_pomelo/model/notification/ios_config.dart';
 
-import '../base/base_manage.dart';
+import '../../base/base_manage.dart';
+import 'android_config.dart';
+import 'ios_config.dart';
 
 //当收到消息通知时的回调
-typedef OnReceiveNotification = Future Function(
+typedef OnNotificationReceive = Future Function(
     int id, String? title, String? body, String? payload);
 
 //当通知消息被点击触发时
-typedef OnSelectNotification = Future Function(String? payload);
+typedef OnNotificationSelect = Future Function(String? payload);
 
 /*
 * 本地通知管理
@@ -28,10 +28,10 @@ class JNotificationManage extends BaseManage {
   final String _defaultIconName = "ic_launcher";
 
   //接受通知消息回调集合
-  final List<OnReceiveNotification> _receiveNotificationListeners = [];
+  final List<OnNotificationReceive> _notificationReceiveListeners = [];
 
   //通知消息点击触发回调集合
-  final List<OnSelectNotification> _selectNotificationListeners = [];
+  final List<OnNotificationSelect> _notificationSelectListeners = [];
 
   //通知推送管理
   late FlutterLocalNotificationsPlugin localNotification;
@@ -173,24 +173,24 @@ class JNotificationManage extends BaseManage {
   Future<void> cancelAll() => localNotification.cancelAll();
 
   //添加接受消息监听
-  void addReceiveListener(OnReceiveNotification listener) =>
-      _receiveNotificationListeners.add(listener);
+  void addReceiveListener(OnNotificationReceive listener) =>
+      _notificationReceiveListeners.add(listener);
 
   //添加消息选择监听
-  void addSelectListener(OnSelectNotification listener) =>
-      _selectNotificationListeners.add(listener);
+  void addSelectListener(OnNotificationSelect listener) =>
+      _notificationSelectListeners.add(listener);
 
   //当接收到通知消息回调
   Future _onReceiveNotification(
       int id, String? title, String? body, String? payload) async {
-    for (var item in _receiveNotificationListeners) {
+    for (var item in _notificationReceiveListeners) {
       await item(id, title, body, payload);
     }
   }
 
   //消息通知点击事件回调
   Future _onNotificationSelect(String? payload) async {
-    for (var item in _selectNotificationListeners) {
+    for (var item in _notificationSelectListeners) {
       await item(payload);
     }
   }

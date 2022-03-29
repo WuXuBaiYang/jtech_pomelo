@@ -6,16 +6,21 @@ export 'base/base_model.dart';
 export 'base/base_page.dart';
 export 'base/base_widget.dart';
 
-//预设实体类
-export 'model/notification/android_config.dart';
-export 'model/notification/ios_config.dart';
-export 'model/menu_item.dart';
-
 //管理方法实现
+export 'manage/notification/android_config.dart';
+export 'manage/notification/ios_config.dart';
+export 'manage/notification/notification.dart';
 export 'manage/cache.dart';
 export 'manage/event.dart';
-export 'manage/notification.dart';
 export 'manage/router.dart';
+
+//实体类
+export 'model/menu_item.dart';
+
+//网络模块方法
+export 'net/api_cancel.dart';
+export 'net/request.dart';
+export 'net/response.dart';
 
 //工具方法
 export 'util/data_util.dart';
