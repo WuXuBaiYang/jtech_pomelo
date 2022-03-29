@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jtech_pomelo/pomelo.dart';
+import 'package:jtech_pomelo/model/menu_item.dart';
 
 //菜单项点击事件
 typedef OnMenuItemTap = void Function(String id);
@@ -129,9 +129,9 @@ class JSheetUtil {
           return ListTile(
             leading: item.icon,
             enabled: item.enable,
-            title: Text(item.title, style: titleStyle),
-            subtitle: null != item.subTitle
-                ? Text(item.subTitle!, style: subTitleStyle)
+            title: Text(item.text, style: titleStyle),
+            subtitle: null != item.subText
+                ? Text(item.subText!, style: subTitleStyle)
                 : null,
             onTap: () {
               var id = item.id ?? "$i";

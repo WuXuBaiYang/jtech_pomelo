@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:jtech_pomelo/base/base_model.dart';
+import 'package:jtech_pomelo/util/toast_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../base/base_model.dart';
-import './toast_util.dart';
 
 //回调请求失败的请求
 typedef OnPermissionCheckFail = void Function(

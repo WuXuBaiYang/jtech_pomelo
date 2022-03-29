@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../base/base_manage.dart';
+import 'package:jtech_pomelo/base/base_manage.dart';
 
 /*
 * 路由管理类

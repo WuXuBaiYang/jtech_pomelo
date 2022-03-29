@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-import '../../base/base_manage.dart';
+import 'package:jtech_pomelo/base/base_manage.dart';
 import 'android_config.dart';
 import 'ios_config.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/widget/empty_box.dart';
 
-import '../widget/empty_box.dart';
 
 //加载弹窗加载回调
 typedef OnLoading<T> = Future<T> Function();

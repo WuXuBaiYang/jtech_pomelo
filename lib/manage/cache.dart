@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:jtech_pomelo/base/base_manage.dart';
+import 'package:jtech_pomelo/util/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../base/base_manage.dart';
-import '../util/util.dart';
 
 /*
 * 缓存管理

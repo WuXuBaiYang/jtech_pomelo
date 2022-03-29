@@ -1,4 +1,4 @@
-import '../../base/base_model.dart';
+import 'package:jtech_pomelo/base/base_model.dart';
 
 /*
 * IOS通知相关字段

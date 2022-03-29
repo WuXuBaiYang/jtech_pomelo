@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:jtech_pomelo/base/base_model.dart';
 
-import '../base/base_model.dart';
 
 /*
 * 请求对象实体

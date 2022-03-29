@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:jtech_pomelo/base/base_manage.dart';
 
-import '../base/base_manage.dart';
 
 /*
 * 请求撤销管理

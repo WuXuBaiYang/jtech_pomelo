@@ -1,6 +1,6 @@
-import '../base/base_manage.dart';
-import '../base/base_model.dart';
 import 'dart:async';
+import 'package:jtech_pomelo/base/base_manage.dart';
+import 'package:jtech_pomelo/base/base_model.dart';
 
 /*
 * 消息总线管理

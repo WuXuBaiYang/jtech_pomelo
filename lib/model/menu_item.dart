@@ -1,32 +1,24 @@
 import 'package:flutter/cupertino.dart';
-import 'package:jtech_pomelo/base/base_model.dart';
+import 'package:jtech_pomelo/model/option_item.dart';
 
 /*
-* 菜单子项对象
+* 菜单项
 * @author JTech JH
-* @Time 2022/3/28 16:38
+* @Time 2022/3/29 16:20
 */
-class MenuItem extends BaseModel {
-  //菜单id
-  final String? id;
-
-  //标题
-  final String title;
-
+class MenuItem extends OptionItem {
   //副标题
-  final String? subTitle;
+  final String? subText;
 
-  //头部图标
+  //图标
   final Widget? icon;
 
-  //是否可用
-  final bool enable;
-
   MenuItem({
-    required this.title,
-    this.id,
-    this.subTitle,
+    required String text,
+    dynamic id,
+    bool enable = true,
+    //基础参数
+    this.subText,
     this.icon,
-    bool? enable,
-  }) : enable = enable ?? true;
+  }) : super(text: text, id: id, enable: enable);
 }

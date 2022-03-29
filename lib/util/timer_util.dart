@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:jtech_pomelo/util/data_util.dart';
+import 'package:jtech_pomelo/util/util.dart';
 
-import '../util/data_util.dart';
-import '../util/util.dart';
 
 //循环计时器回调
 typedef OnTimerCallback = void Function(Timer timer);
