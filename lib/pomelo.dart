@@ -10,6 +10,7 @@ export 'base/base_widget.dart';
 export 'model/menu_item.dart';
 
 //管理方法实现
+export 'manage/cache.dart';
 export 'manage/event.dart';
 export 'manage/router.dart';
 

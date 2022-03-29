@@ -29,6 +29,12 @@ dependencies:
   # 消息提示管理
   fluttertoast: ^8.0.9
 
+  # 数据存储管理
+  shared_preferences: ^2.0.13
+
+  # 本地通知栏管理
+  flutter_local_notifications: ^9.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
