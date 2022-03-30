@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/model/menu_item.dart';
+import 'package:jtech_pomelo/pomelo.dart';
 
 //菜单项点击事件
-typedef OnMenuItemTap = void Function(String? id, int i);
+typedef OnMenuItemTap<T extends MenuItem> = void Function(T? item, int i);
 
 /*
 * 底部弹出工具方法
@@ -86,13 +87,14 @@ class JSheetUtil {
   }
 
   //展示底部菜单弹窗
-  static Future<String?> showMenu(
+  static Future<T?> showMenu<T extends MenuItem>(
     BuildContext context, {
-    required List<MenuItem> menuItems,
+    required List<T> menuItems,
     IndexedWidgetBuilder? separatorBuilder,
+    bool? showDivider,
     TextStyle? titleStyle,
     TextStyle? subTitleStyle,
-    OnMenuItemTap? onItemTap,
+    OnMenuItemTap<T>? onItemTap,
     EdgeInsetsGeometry? padding,
     //通用参数
     Color? backgroundColor,
@@ -106,9 +108,10 @@ class JSheetUtil {
     bool? enableDrag,
   }) {
     //默认值
+    showDivider ??= true;
     separatorBuilder ??= (_, i) => const Divider();
     padding ??= const EdgeInsets.symmetric(vertical: 15);
-    return show<String>(
+    return show<T>(
       context,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -123,7 +126,10 @@ class JSheetUtil {
         itemCount: menuItems.length,
         padding: padding,
         shrinkWrap: true,
-        separatorBuilder: separatorBuilder!,
+        separatorBuilder: (c, i) {
+          if (showDivider!) return separatorBuilder!(c, i);
+          return const EmptyBox();
+        },
         itemBuilder: (_, i) {
           var item = menuItems[i];
           return ListTile(
@@ -134,8 +140,8 @@ class JSheetUtil {
                 ? Text(item.subText!, style: subTitleStyle)
                 : null,
             onTap: () {
-              onItemTap?.call(item.id, i);
-              Navigator.pop(context, item.id ?? "$i");
+              onItemTap?.call(item, i);
+              Navigator.pop(context, item);
             },
           );
         },

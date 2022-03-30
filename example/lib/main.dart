@@ -42,28 +42,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ElevatedButton(
           child: const Text("测试"),
           onPressed: () {
-
+            PickerUtil.pick(
+              context,
+              menuItems: [
+                PickerMenuItem.image(text: "图片"),
+                PickerMenuItem.imageTake(text: "拍摄", frontCamera: true),
+                PickerMenuItem.video(text: "视频"),
+                PickerMenuItem.videoRecord(
+                    text: "录制", maxDuration: Duration(seconds: 10)),
+                PickerMenuItem.custom(text: "自定义", allowedExtensions: ["pdf"]),
+              ],
+            ).then((value) {
+              print("");
+            });
           },
         ),
       ),
-    );
-  }
-}
-
-class JAPI extends BaseJAPI {
-  JAPI({required baseUrl}) : super(baseUrl: baseUrl);
-
-  @override
-  ResponseModel<T> handleResponse<T>(Response? response) {
-    if (response?.statusCode != 200) {
-      throw Exception(response?.statusMessage);
-    }
-    var result = response?.data;
-    return ResponseModel(
-      code: result["code"],
-      message: result["msg"],
-      data: result["data"],
-      success: result["code"] == 0,
     );
   }
 }

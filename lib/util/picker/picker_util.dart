@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jtech_pomelo/util/picker/file_info.dart';
 import 'package:jtech_pomelo/util/picker/menu_item.dart';
 import 'package:jtech_pomelo/util/sheet_util.dart';
@@ -9,6 +13,82 @@ import 'package:jtech_pomelo/util/sheet_util.dart';
 * @Time 2022/3/29 17:00
 */
 class PickerUtil {
+  //选择图片附件
+  static Future<JPickerResult> pickImage(
+    BuildContext context, {
+    //当只有一条时，是否直接打开
+    bool? directOpen,
+    int? maxCount,
+    bool? imageTake,
+  }) {
+    //默认值
+    directOpen ??= true;
+    maxCount ??= 1;
+    imageTake ??= true;
+    var items = <PickerMenuItem>[
+      PickerMenuItem.image(text: "选择图片"),
+    ];
+    if (imageTake) {
+      items.add(PickerMenuItem.imageTake(text: "拍摄照片"));
+    }
+    return pick(
+      context,
+      menuItems: items,
+      directOpen: directOpen,
+      maxCount: maxCount,
+    );
+  }
+
+  //选择视频
+  static Future<JPickerResult> pickVideo(
+    BuildContext context, {
+    //当只有一条时，是否直接打开
+    bool? directOpen,
+    int? maxCount,
+    bool? videoRecord,
+  }) {
+    directOpen ??= true;
+    maxCount ??= 1;
+    videoRecord ??= true;
+    var items = <PickerMenuItem>[
+      PickerMenuItem.video(text: "选择视频"),
+    ];
+    if (videoRecord) {
+      items.add(PickerMenuItem.imageTake(text: "录制视频"));
+    }
+    return pick(
+      context,
+      menuItems: items,
+      directOpen: directOpen,
+      maxCount: maxCount,
+    );
+  }
+
+  //选择自定义类型附件
+  static Future<JPickerResult> pickCustom(
+    BuildContext context, {
+    required String itemText,
+    required List<String> allowedExtensions,
+    //当只有一条时，是否直接打开
+    bool? directOpen,
+    int? maxCount,
+  }) {
+    directOpen ??= true;
+    maxCount ??= 1;
+    var items = <PickerMenuItem>[
+      PickerMenuItem.custom(
+        text: itemText,
+        allowedExtensions: allowedExtensions,
+      ),
+    ];
+    return pick(
+      context,
+      menuItems: items,
+      directOpen: directOpen,
+      maxCount: maxCount,
+    );
+  }
+
   //默认选择方法
   static Future<JPickerResult> pick(
     BuildContext context, {
@@ -16,7 +96,7 @@ class PickerUtil {
     //当只有一条时，是否直接打开
     bool? directOpen,
     int? maxCount,
-  }) async {
+  }) {
     //默认值
     directOpen ??= true;
     maxCount ??= 1;
@@ -26,16 +106,99 @@ class PickerUtil {
     }
     return JSheetUtil.showMenu(
       context,
+      showDivider: false,
       menuItems: menuItems,
-    ).then<JPickerResult>((id) {
-      var i = num.parse(id ?? "0");
-      return _doPick(menuItems[i.toInt()], maxCount!);
+    ).then<JPickerResult>((item) {
+      return _doPick(item, maxCount!);
     });
   }
 
+  //附件选择方法对照表
+  static final Map<PickerType,
+      Future Function(PickerMenuItem item, bool multiple)> _pickMap = {
+    //图片选择
+    PickerType.image: (item, multiple) {
+      if (multiple) {
+        return ImagePicker().pickMultiImage(
+          maxWidth: item.maxWidth,
+          maxHeight: item.maxHeight,
+          imageQuality: item.imageQuality,
+        );
+      } else {
+        return ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          maxWidth: item.maxWidth,
+          maxHeight: item.maxHeight,
+          imageQuality: item.imageQuality,
+        );
+      }
+    },
+    //图片拍摄
+    PickerType.imageTake: (item, multiple) {
+      return ImagePicker().pickImage(
+        source: ImageSource.camera,
+        maxWidth: item.maxWidth,
+        maxHeight: item.maxHeight,
+        imageQuality: item.imageQuality,
+        preferredCameraDevice:
+            item.frontCamera ? CameraDevice.front : CameraDevice.rear,
+      );
+    },
+    //视频选择
+    PickerType.video: (item, multiple) {
+      if (multiple) {
+        return FilePicker.platform.pickFiles(
+          type: FileType.video,
+          allowMultiple: multiple,
+        );
+      } else {
+        return ImagePicker().pickVideo(
+          source: ImageSource.gallery,
+        );
+      }
+    },
+    //视频录制
+    PickerType.videoRecord: (item, multiple) {
+      return ImagePicker().pickVideo(
+        source: ImageSource.camera,
+        maxDuration: item.maxDuration,
+        preferredCameraDevice:
+            item.frontCamera ? CameraDevice.front : CameraDevice.rear,
+      );
+    },
+    //自定义格式
+    PickerType.custom: (item, multiple) {
+      return FilePicker.platform.pickFiles(
+        allowedExtensions: item.allowedExtensions,
+        type: FileType.custom,
+        allowMultiple: multiple,
+      );
+    },
+  };
+
   //执行选择操作
-  static JPickerResult _doPick(PickerMenuItem? item, int maxCount) {
-    ///带实现
-    return JPickerResult(files: []);
+  static Future<JPickerResult> _doPick(
+      PickerMenuItem? item, int maxCount) async {
+    List<JFile> files = [];
+    if (null != item && maxCount > 0) {
+      dynamic result = await _pickMap[item.type]!(item, maxCount > 1);
+      if (result is List<XFile>) {
+        for (var it in result) {
+          files.add(await JFile.fromPath(it.path));
+        }
+      } else if (result is XFile) {
+        files.add(await JFile.fromPath(result.path));
+      } else if (result is FilePickerResult) {
+        for (var it in result.files) {
+          if (null == it.path) continue;
+          files.add(await JFile.fromPath(it.path!));
+        }
+      }
+    }
+    //判断最大选择数量，截取符合条件的集合
+    if (files.length > maxCount) {
+      files = files.sublist(0, maxCount);
+    }
+    return JPickerResult(files: files);
   }
 }
