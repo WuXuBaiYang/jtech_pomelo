@@ -3,7 +3,7 @@ import 'package:jtech_pomelo/model/menu_item.dart';
 import 'package:jtech_pomelo/pomelo.dart';
 
 //菜单项点击事件
-typedef OnMenuItemTap<T extends MenuItem> = void Function(T? item, int i);
+typedef OnMenuItemTap<T extends MenuItem> = void Function(T? item, int index);
 
 /*
 * 底部弹出工具方法

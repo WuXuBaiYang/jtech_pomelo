@@ -24,11 +24,13 @@ export 'net/base_api.dart';
 export 'net/request.dart';
 export 'net/response.dart';
 
-
 //工具方法
 export 'util/picker/file_info.dart';
 export 'util/picker/menu_item.dart';
 export 'util/picker/picker_util.dart';
+export 'util/preview/options_item.dart';
+export 'util/preview/preview_page.dart';
+export 'util/preview/preview_util.dart';
 export 'util/data_util.dart';
 export 'util/dialog_util.dart';
 export 'util/file_util.dart';
@@ -46,4 +48,7 @@ export 'util/util.dart';
 export 'widget/empty_box.dart';
 
 //内部依赖包导出
-export "package:dio/dio.dart";
+export 'package:dio/dio.dart';
+export 'package:extended_image/src/utils.dart';
+export 'package:extended_image/src/gesture/utils.dart';
+export 'package:extended_image/src/editor/editor_utils.dart';

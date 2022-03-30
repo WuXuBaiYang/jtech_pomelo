@@ -31,17 +31,27 @@ class JRouter extends BaseManage {
 
   //页面跳转
   Future<T?>? push<T>(
-    Widget page, {
+    RoutePageBuilder builder, {
     String? name,
     Object? arguments,
-    bool maintainState = true,
+    bool? opaque,
+    Color? barrierColor,
+    bool? barrierDismissible,
+    Duration? transitionDuration,
+    Duration? reverseTransitionDuration,
+    RouteTransitionsBuilder? transitionsBuilder,
     bool fullscreenDialog = false,
   }) {
-    return navigator?.push<T>(_createMaterialPageRoute<T>(
-      page,
+    return navigator?.push<T>(_createPageRoute<T>(
+      builder: builder,
       name: name,
       arguments: arguments,
-      maintainState: maintainState,
+      opaque: opaque,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      transitionDuration: transitionDuration,
+      reverseTransitionDuration: reverseTransitionDuration,
+      transitionsBuilder: transitionsBuilder,
       fullscreenDialog: fullscreenDialog,
     ));
   }
@@ -57,19 +67,29 @@ class JRouter extends BaseManage {
 
   //页面跳转并移除到目标页面
   Future<T?>? pushAndRemoveUntil<T>(
-    Widget page, {
+    RoutePageBuilder builder, {
     required untilPath,
     String? name,
     Object? arguments,
-    bool maintainState = true,
+    bool? opaque,
+    Color? barrierColor,
+    bool? barrierDismissible,
+    Duration? transitionDuration,
+    Duration? reverseTransitionDuration,
+    RouteTransitionsBuilder? transitionsBuilder,
     bool fullscreenDialog = false,
   }) {
     return navigator?.pushAndRemoveUntil<T>(
-      _createMaterialPageRoute<T>(
-        page,
+      _createPageRoute<T>(
+        builder: builder,
         name: name,
         arguments: arguments,
-        maintainState: maintainState,
+        opaque: opaque,
+        barrierColor: barrierColor,
+        barrierDismissible: barrierDismissible,
+        transitionDuration: transitionDuration,
+        reverseTransitionDuration: reverseTransitionDuration,
+        transitionsBuilder: transitionsBuilder,
         fullscreenDialog: fullscreenDialog,
       ),
       ModalRoute.withName(untilPath),
@@ -88,17 +108,27 @@ class JRouter extends BaseManage {
 
   //跳转页面并一直退出到目标页面
   Future<T?>? pushReplacement<T, TO>(
-    Widget page, {
+    RoutePageBuilder builder, {
     String? name,
     Object? arguments,
-    bool maintainState = true,
+    bool? opaque,
+    Color? barrierColor,
+    bool? barrierDismissible,
+    Duration? transitionDuration,
+    Duration? reverseTransitionDuration,
+    RouteTransitionsBuilder? transitionsBuilder,
     bool fullscreenDialog = false,
   }) {
-    return navigator?.pushReplacement<T, TO>(_createMaterialPageRoute<T>(
-      page,
+    return navigator?.pushReplacement<T, TO>(_createPageRoute<T>(
+      builder: builder,
       name: name,
       arguments: arguments,
-      maintainState: maintainState,
+      opaque: opaque,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      transitionDuration: transitionDuration,
+      reverseTransitionDuration: reverseTransitionDuration,
+      transitionsBuilder: transitionsBuilder,
       fullscreenDialog: fullscreenDialog,
     ));
   }
@@ -124,22 +154,48 @@ class JRouter extends BaseManage {
   }
 
   //创建Material风格的页面路由对象
-  MaterialPageRoute<T> _createMaterialPageRoute<T>(
-    Widget page, {
+  PageRouteBuilder<T> _createPageRoute<T>({
+    required RoutePageBuilder builder,
     String? name,
     Object? arguments,
-    bool maintainState = true,
+    bool? opaque,
+    Color? barrierColor,
+    bool? barrierDismissible,
+    Duration? transitionDuration,
+    Duration? reverseTransitionDuration,
+    RouteTransitionsBuilder? transitionsBuilder,
     bool fullscreenDialog = false,
-  }) =>
-      MaterialPageRoute<T>(
-        fullscreenDialog: fullscreenDialog,
-        maintainState: maintainState,
-        builder: (context) => page,
-        settings: RouteSettings(
-          name: name,
-          arguments: arguments,
-        ),
-      );
+  }) {
+    //默认值
+    transitionsBuilder ??= _defTransitionsBuilderWidget;
+    transitionDuration ??= const Duration(milliseconds: 300);
+    reverseTransitionDuration ??= const Duration(milliseconds: 300);
+    opaque ??= true;
+    barrierDismissible ??= false;
+    return PageRouteBuilder<T>(
+      pageBuilder: builder,
+      transitionsBuilder: transitionsBuilder,
+      transitionDuration: transitionDuration,
+      reverseTransitionDuration: reverseTransitionDuration,
+      opaque: opaque,
+      barrierDismissible: barrierDismissible,
+      barrierColor: barrierColor,
+      fullscreenDialog: fullscreenDialog,
+      settings: RouteSettings(
+        name: name,
+        arguments: arguments,
+      ),
+    );
+  }
+
+  //默认页面过渡动画
+  Widget _defTransitionsBuilderWidget(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child) {
+    return child;
+  }
 
   //页面退出
   Future<bool>? maybePop<T>([T? result]) => navigator?.maybePop<T>(result);
