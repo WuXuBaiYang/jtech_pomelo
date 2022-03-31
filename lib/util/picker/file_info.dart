@@ -71,12 +71,12 @@ class JFile {
   });
 
   //从网络地址中加载
-  static Future<JFile> fromUrl(
+  static JFile fromUrl(
     String url, {
     String? name,
     int? length,
     String? suffixes,
-  }) async =>
+  }) =>
       JFile(
         uri: url,
         name: name,
@@ -119,7 +119,7 @@ class JFile {
   bool get isLocalFile => !isNetFile;
 
   //判断是否为网络文件
-  bool get isNetFile => JMatchUtil.isNetUri(uri);
+  bool get isNetFile => uri.startsWith(RegExp(r"http://|https://"));
 
   //判断文件类型是否为图片
   bool get isImageType => JMatchUtil.isImageFile("$uri$suffixes");

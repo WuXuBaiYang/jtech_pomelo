@@ -45,20 +45,21 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             jRouter.push(
               (context, animation, secondaryAnimation) {
+
                 return PreviewPage(
                   items: [
-                    PreviewOptionItem(
-                        type: PreviewType.image,
-                        uri:
-                            "https://tse1-mm.cn.bing.net/th/id/R-C.4d9cd2e53dddfc238a06e750b73cd023?rik=MsMCKPGumufOyQ&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170209%2fc2accfe637f86fb6f11949cb8651a09b.jpg&ehk=ia2TVXcow6ygWUVZ1yod5xH4aGd8565SYn6CRpxkNoo%3d&risl=&pid=ImgRaw&r=0"),
-                    PreviewOptionItem(
-                        type: PreviewType.video,
-                        uri:
-                            "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
-                    PreviewOptionItem(
-                        type: PreviewType.other,
-                        uri:
-                            "https://img.mianfeiwendang.com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg"),
+                    PreviewOptionItem.image(
+                      file: JFile.fromUrl(
+                          "https://img.mianfeiwendang.com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg"),
+                    ),
+                    PreviewOptionItem.video(
+                      file: JFile.fromUrl(
+                          "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
+                    ),
+                    PreviewOptionItem.other(
+                      file: JFile.fromUrl(
+                          "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
+                    ),
                   ],
                 );
               },

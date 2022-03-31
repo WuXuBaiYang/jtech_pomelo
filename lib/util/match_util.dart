@@ -12,10 +12,6 @@ class JMatchUtil {
   static Iterable<Match> match(Pattern pattern, {required String string}) =>
       pattern.allMatches(string);
 
-  //判断是否为网络地址
-  static bool isNetUri(String string) =>
-      hasMatch(JMatchReg.netUri, string: string);
-
   //判断是否为手机号格式
   static bool isPhoneNumber_86(String string) =>
       hasMatch(JMatchReg.phoneNumber_86, string: string);
@@ -43,9 +39,6 @@ class JMatchUtil {
 * @Time 2022/3/17 15:46
 */
 class JMatchReg {
-  //判断uri是否为网络地址
-  static const netUri = r"^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$";
-
   //手机号匹配(+86)
   static const phoneNumber_86 =
       r'^((\+86)?|(\+86-)?)1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$';

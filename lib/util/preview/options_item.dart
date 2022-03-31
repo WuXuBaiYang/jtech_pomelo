@@ -65,7 +65,7 @@ class PreviewOptionItem extends OptionItem {
     bool? enable,
   }) : this(
           file: file,
-          type: PreviewType.video,
+          type: PreviewType.other,
           text: text,
           id: id,
           enable: enable,

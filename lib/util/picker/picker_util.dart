@@ -113,75 +113,12 @@ class PickerUtil {
     });
   }
 
-  //附件选择方法对照表
-  static final Map<PickerType,
-      Future Function(PickerMenuItem item, bool multiple)> _pickMap = {
-    //图片选择
-    PickerType.image: (item, multiple) {
-      if (multiple) {
-        return ImagePicker().pickMultiImage(
-          maxWidth: item.maxWidth,
-          maxHeight: item.maxHeight,
-          imageQuality: item.imageQuality,
-        );
-      } else {
-        return ImagePicker().pickImage(
-          source: ImageSource.gallery,
-          maxWidth: item.maxWidth,
-          maxHeight: item.maxHeight,
-          imageQuality: item.imageQuality,
-        );
-      }
-    },
-    //图片拍摄
-    PickerType.imageTake: (item, multiple) {
-      return ImagePicker().pickImage(
-        source: ImageSource.camera,
-        maxWidth: item.maxWidth,
-        maxHeight: item.maxHeight,
-        imageQuality: item.imageQuality,
-        preferredCameraDevice:
-            item.frontCamera ? CameraDevice.front : CameraDevice.rear,
-      );
-    },
-    //视频选择
-    PickerType.video: (item, multiple) {
-      if (multiple) {
-        return FilePicker.platform.pickFiles(
-          type: FileType.video,
-          allowMultiple: multiple,
-        );
-      } else {
-        return ImagePicker().pickVideo(
-          source: ImageSource.gallery,
-        );
-      }
-    },
-    //视频录制
-    PickerType.videoRecord: (item, multiple) {
-      return ImagePicker().pickVideo(
-        source: ImageSource.camera,
-        maxDuration: item.maxDuration,
-        preferredCameraDevice:
-            item.frontCamera ? CameraDevice.front : CameraDevice.rear,
-      );
-    },
-    //自定义格式
-    PickerType.custom: (item, multiple) {
-      return FilePicker.platform.pickFiles(
-        allowedExtensions: item.allowedExtensions,
-        type: FileType.custom,
-        allowMultiple: multiple,
-      );
-    },
-  };
-
   //执行选择操作
   static Future<JPickerResult> _doPick(
       PickerMenuItem? item, int maxCount) async {
     List<JFile> files = [];
     if (null != item && maxCount > 0) {
-      dynamic result = await _pickMap[item.type]!(item, maxCount > 1);
+      dynamic result = await _pickFile(item, maxCount > 1);
       if (result is List<XFile>) {
         for (var it in result) {
           files.add(await JFile.fromPath(it.path));
@@ -200,5 +137,59 @@ class PickerUtil {
       files = files.sublist(0, maxCount);
     }
     return JPickerResult(files: files);
+  }
+
+  //附件选择
+  static Future<dynamic> _pickFile(PickerMenuItem item, bool multiple) {
+    switch (item.type) {
+      case PickerType.image:
+        if (multiple) {
+          return ImagePicker().pickMultiImage(
+            maxWidth: item.maxWidth,
+            maxHeight: item.maxHeight,
+            imageQuality: item.imageQuality,
+          );
+        } else {
+          return ImagePicker().pickImage(
+            source: ImageSource.gallery,
+            maxWidth: item.maxWidth,
+            maxHeight: item.maxHeight,
+            imageQuality: item.imageQuality,
+          );
+        }
+      case PickerType.imageTake:
+        return ImagePicker().pickImage(
+          source: ImageSource.camera,
+          maxWidth: item.maxWidth,
+          maxHeight: item.maxHeight,
+          imageQuality: item.imageQuality,
+          preferredCameraDevice:
+              item.frontCamera ? CameraDevice.front : CameraDevice.rear,
+        );
+      case PickerType.video:
+        if (multiple) {
+          return FilePicker.platform.pickFiles(
+            type: FileType.video,
+            allowMultiple: multiple,
+          );
+        } else {
+          return ImagePicker().pickVideo(
+            source: ImageSource.gallery,
+          );
+        }
+      case PickerType.videoRecord:
+        return ImagePicker().pickVideo(
+          source: ImageSource.camera,
+          maxDuration: item.maxDuration,
+          preferredCameraDevice:
+              item.frontCamera ? CameraDevice.front : CameraDevice.rear,
+        );
+      case PickerType.custom:
+        return FilePicker.platform.pickFiles(
+          allowedExtensions: item.allowedExtensions,
+          type: FileType.custom,
+          allowMultiple: multiple,
+        );
+    }
   }
 }

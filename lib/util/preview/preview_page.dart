@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
 import 'package:jtech_pomelo/manage/router.dart';
+import 'package:jtech_pomelo/pomelo.dart';
 import 'package:jtech_pomelo/util/preview/options_item.dart';
 import 'package:jtech_pomelo/widget/empty_box.dart';
 
@@ -51,7 +52,15 @@ class _PreviewPageState extends BaseState<PreviewPage> {
           itemBuilder: (_, i) {
             var item = widget.items[i];
             var child = widget.itemBuilder?.call(item, i);
-            return child ?? _previewMap[item.type]!(item);
+            if (null != child) return child;
+            switch (item.type) {
+              case PreviewType.image: //图片预览
+                return _buildImagePreview(context, item);
+              case PreviewType.video: //视频预览
+                return _buildVideoPreview(context, item);
+              case PreviewType.other: //其他预览
+                return _buildOtherPreview(context, item);
+            }
           },
           itemCount: widget.items.length,
           controller: ExtendedPageController(
@@ -64,35 +73,43 @@ class _PreviewPageState extends BaseState<PreviewPage> {
     );
   }
 
-  //附件预览实现表
-  final Map<PreviewType, Widget Function(PreviewOptionItem item)> _previewMap =
-      {
-    PreviewType.image: (item) {
-      return EmptyBox();
-    },
-    PreviewType.video: (item) {
-      return EmptyBox();
-    },
-    PreviewType.other: (item) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(
-              Icons.warning_rounded,
+  //构建图片预览
+  Widget _buildImagePreview(BuildContext context, PreviewOptionItem item) {
+    return JImage.jFile(
+      item.file,
+      mode: ExtendedImageMode.gesture,
+      gestureConfig: GestureConfig(
+        cacheGesture: true,
+        inPageView: true,
+      ),
+    );
+  }
+
+  //构建视频预览
+  Widget _buildVideoPreview(BuildContext context, PreviewOptionItem item) {
+    return EmptyBox();
+  }
+
+  //构建其他预览
+  Widget _buildOtherPreview(BuildContext context, PreviewOptionItem item) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Icon(
+            Icons.warning_rounded,
+            color: Colors.white,
+            size: 38,
+          ),
+          SizedBox(height: 8),
+          Text(
+            "该附件无法预览",
+            style: TextStyle(
               color: Colors.white,
-              size: 38,
             ),
-            SizedBox(height: 8),
-            Text(
-              "该附件无法预览",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-  };
+          ),
+        ],
+      ),
+    );
+  }
 }

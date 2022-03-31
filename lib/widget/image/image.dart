@@ -4,15 +4,30 @@ import 'dart:typed_data';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jtech_pomelo/pomelo.dart';
-import 'package:jtech_pomelo/widget/image/controller.dart';
+import 'package:image_editor/image_editor.dart';
+import 'package:jtech_pomelo/base/base_widget.dart';
+import 'package:jtech_pomelo/util/file_util.dart';
+import 'package:jtech_pomelo/util/picker/file_info.dart';
+import 'package:jtech_pomelo/util/util.dart';
+import 'package:jtech_pomelo/widget/empty_box.dart';
+import 'package:jtech_pomelo/widget/image/clip.dart';
+
+//图片加载构造器
+typedef ImageBuilder = Widget Function(BuildContext context, Widget child);
+
+//图片占位构造器
+typedef PlaceholderBuilder = Widget Function(BuildContext context);
+
+//图片异常占位构造器
+typedef ErrorBuilder = Widget Function(
+    BuildContext context, Object? error, StackTrace? stackTrace);
 
 /*
-* 图片组件
+* 图片组件-状态
 * @author JTech JH
 * @Time 2022/3/30 17:08
 */
-class JImage extends BaseStatelessWidget {
+class JImage extends BaseStatefulWidget {
   //图片对象代理
   final ImageProvider image;
 
@@ -55,10 +70,25 @@ class JImage extends BaseStatelessWidget {
   //缩放模式配置
   final GestureConfig? gestureConfig;
 
-  //图片控制器
-  final ImageController? controller;
+  //图片构造器
+  final ImageBuilder? imageBuilder;
 
-  const JImage({
+  //图片占位图构造器
+  final PlaceholderBuilder? placeholderBuilder;
+
+  //图片异常占位构造器
+  final ErrorBuilder? errorBuilder;
+
+  //图片裁剪构造
+  final ImageClip? clip;
+
+  //编辑控制key
+  final GlobalKey<ExtendedImageEditorState> editorKey = GlobalKey();
+
+  //手势管理key
+  final GlobalKey<ExtendedImageGestureState> gestureKey = GlobalKey();
+
+  JImage({
     Key? key,
     required this.image,
     this.width,
@@ -70,7 +100,10 @@ class JImage extends BaseStatelessWidget {
     this.blendMode,
     this.editorConfig,
     this.gestureConfig,
-    this.controller,
+    this.imageBuilder,
+    this.placeholderBuilder,
+    this.errorBuilder,
+    this.clip,
     Alignment? alignment,
     ImageRepeat? repeat,
     FilterQuality? filterQuality,
@@ -102,7 +135,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this(
           key: key,
           image: file.isNetFile
@@ -129,7 +165,10 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
   //本地图片文件路径
@@ -151,7 +190,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this.file(
           File(path),
           key: key,
@@ -169,7 +211,10 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
   //本地图片文件
@@ -191,7 +236,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this(
           key: key,
           image: ExtendedFileImageProvider(
@@ -211,7 +259,10 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
   //assets图片文件
@@ -235,7 +286,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this(
           key: key,
           image: ExtendedAssetImageProvider(
@@ -257,7 +311,10 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
   //内存图片文件
@@ -279,7 +336,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this(
           key: key,
           image: ExtendedMemoryImageProvider(
@@ -299,7 +359,10 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
   //网络图片文件
@@ -323,7 +386,10 @@ class JImage extends BaseStatelessWidget {
     ExtendedImageMode? mode,
     EditorConfig? editorConfig,
     GestureConfig? gestureConfig,
-    ImageController? controller,
+    ImageBuilder? imageBuilder,
+    PlaceholderBuilder? placeholderBuilder,
+    ErrorBuilder? errorBuilder,
+    ImageClip? clip,
   }) : this(
           key: key,
           image: ExtendedNetworkImageProvider(
@@ -345,42 +411,138 @@ class JImage extends BaseStatelessWidget {
           mode: mode,
           editorConfig: editorConfig,
           gestureConfig: gestureConfig,
-          controller: controller,
+          imageBuilder: imageBuilder,
+          placeholderBuilder: placeholderBuilder,
+          errorBuilder: errorBuilder,
+          clip: clip,
         );
 
+  @override
+  State<StatefulWidget> createState() => _JImageState();
+}
+
+/*
+* 图片组件-状态
+* @author JTech JH
+* @Time 2022/3/30 17:08
+*/
+class _JImageState extends BaseState<JImage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: ExtendedImage(
-        image: image,
-        width: width,
-        height: height,
-        fit: mode == ExtendedImageMode.editor ? BoxFit.contain : fit,
-        alignment: alignment,
-        repeat: repeat,
-        color: color,
-        colorBlendMode: blendMode,
-        mode: mode,
-        initEditorConfigHandler: (state) => editorConfig,
-        extendedImageEditorKey: controller?.editorKey,
-        initGestureConfigHandler: (state) => gestureConfig ?? GestureConfig(),
-        extendedImageGestureKey: controller?.gestureKey,
+        image: widget.image,
+        width: widget.width,
+        height: widget.height,
+        fit: widget.mode == ExtendedImageMode.editor
+            ? BoxFit.contain
+            : widget.fit,
+        alignment: widget.alignment,
+        repeat: widget.repeat,
+        color: widget.color,
+        colorBlendMode: widget.blendMode,
+        mode: widget.mode,
+        initEditorConfigHandler: (state) => widget.editorConfig,
+        extendedImageEditorKey: widget.editorKey,
+        initGestureConfigHandler: (state) =>
+            widget.gestureConfig ?? GestureConfig(),
+        extendedImageGestureKey: widget.gestureKey,
         loadStateChanged: (state) {
-          ///等待实现
           switch (state.extendedImageLoadState) {
-            case LoadState.loading:
-              return (config.placeholderBuilder ?? _buildPlaceholder)(context);
-            case LoadState.completed:
-              return (config.imageBuilder ?? _buildImage)(
-                  context, state.completedWidget);
-            case LoadState.failed:
-              return (config.errorBuilder ?? _buildError)(
-                  context, state.lastException, state.lastStack);
+            case LoadState.loading: //加载占位图
+              return _buildPlaceholder(context, state);
+            case LoadState.completed: //完成加载
+              return _buildImage(context, state);
+            case LoadState.failed: //加载失败
+              return _buildError(context, state);
           }
         },
       ),
-      onTap: onTap,
-      onLongPress: onLongPress,
+      onTap: widget.onTap,
+      onLongPress: widget.onLongPress,
+    );
+  }
+
+  //构建构造器
+  Widget _buildPlaceholder(BuildContext context, ExtendedImageState state) {
+    return widget.placeholderBuilder?.call(context) ?? const EmptyBox();
+  }
+
+  //构建图片
+  Widget _buildImage(BuildContext context, ExtendedImageState state) {
+    var child = state.completedWidget;
+    child = widget.imageBuilder?.call(context, child) ?? child;
+    return widget.clip?.clip(context, child) ?? child;
+  }
+
+  //构建加载失败
+  Widget _buildError(BuildContext context, ExtendedImageState state) {
+    return widget.errorBuilder
+            ?.call(context, state.lastException, state.lastStack) ??
+        const EmptyBox();
+  }
+
+  //手势重置
+  void gestureReset() => widget.gestureKey.currentState?.reset();
+
+  //手势滑动
+  void gestureSlide() => widget.gestureKey.currentState?.slide();
+
+  //手势图片缩放
+  void gestureScale({double? scale, Offset? position}) =>
+      widget.gestureKey.currentState
+          ?.handleDoubleTap(scale: scale, doubleTapPosition: position);
+
+  //编辑顺时针旋转90度
+  void editorRotateRight90() =>
+      widget.editorKey.currentState?.rotate(right: true);
+
+  //编辑逆时针旋转90度
+  void editorRotateLeft90() =>
+      widget.editorKey.currentState?.rotate(right: false);
+
+  //编辑镜像翻转
+  void editorFlip() => widget.editorKey.currentState?.flip();
+
+  //编辑重置
+  void editorReset() => widget.editorKey.currentState?.reset();
+
+  //编辑执行裁剪并获取到裁剪后的数据
+  Future<JFile?> editorCropImage() async {
+    var currentState = widget.editorKey.currentState;
+    if (null == currentState) return null;
+    var cropRect = currentState.getCropRect();
+    var imageData = currentState.rawImageData;
+    var action = currentState.editAction;
+    if (null == action) return null;
+    var rotateAngle = action.rotateAngle.toInt();
+    var flipHorizontal = action.flipY;
+    var flipVertical = action.flipX;
+    ImageEditorOption editorOption = ImageEditorOption();
+    //添加裁剪方法
+    if (action.needCrop && null != cropRect) {
+      editorOption.addOption(ClipOption.fromRect(cropRect));
+    }
+    //添加镜像翻转方法
+    if (action.needFlip) {
+      editorOption.addOption(FlipOption(
+        horizontal: flipHorizontal,
+        vertical: flipVertical,
+      ));
+    }
+    //添加旋转方法
+    if (action.hasRotateAngle) {
+      editorOption.addOption(RotateOption(rotateAngle));
+    }
+    var result = await ImageEditor.editImage(
+      image: imageData,
+      imageEditorOption: editorOption,
+    );
+    if (null == result) return null;
+    return JFile.fromMemory(
+      result,
+      fileName: "${JUtil.genID()}.jpeg",
+      cachePath: await JFileUtil.getImageCacheDirPath(),
     );
   }
 }

@@ -46,6 +46,8 @@ export 'util/util.dart';
 
 //组件
 export 'widget/empty_box.dart';
+export 'widget/image/clip.dart';
+export 'widget/image/image.dart';
 
 //内部依赖包导出
 export 'package:dio/dio.dart';
