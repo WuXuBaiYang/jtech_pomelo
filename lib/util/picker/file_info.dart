@@ -119,7 +119,7 @@ class JFile {
   bool get isLocalFile => !isNetFile;
 
   //判断是否为网络文件
-  bool get isNetFile => uri.startsWith(RegExp(r"http://|https://"));
+  bool get isNetFile => JMatchUtil.isHttpProtocol(uri);
 
   //判断文件类型是否为图片
   bool get isImageType => JMatchUtil.isImageFile("$uri$suffixes");

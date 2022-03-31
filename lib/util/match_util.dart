@@ -12,6 +12,10 @@ class JMatchUtil {
   static Iterable<Match> match(Pattern pattern, {required String string}) =>
       pattern.allMatches(string);
 
+  //判断是否为url
+  static bool isHttpProtocol(String string) =>
+      string.startsWith(RegExp(r"http://|https://"));
+
   //判断是否为手机号格式
   static bool isPhoneNumber_86(String string) =>
       hasMatch(JMatchReg.phoneNumber_86, string: string);

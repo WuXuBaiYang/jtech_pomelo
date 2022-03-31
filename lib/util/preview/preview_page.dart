@@ -2,9 +2,10 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
 import 'package:jtech_pomelo/manage/router.dart';
-import 'package:jtech_pomelo/pomelo.dart';
 import 'package:jtech_pomelo/util/preview/options_item.dart';
 import 'package:jtech_pomelo/widget/empty_box.dart';
+import 'package:jtech_pomelo/widget/image/image.dart';
+import 'package:jtech_pomelo/widget/video_player/video_player.dart';
 
 //自定义类型附件预览回调,返回值非空则替代默认预览方式
 typedef PreviewItemBuilder = Widget? Function(
@@ -46,7 +47,7 @@ class _PreviewPageState extends BaseState<PreviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black87,
       body: GestureDetector(
         child: ExtendedImageGesturePageView.builder(
           itemBuilder: (_, i) {
@@ -87,7 +88,14 @@ class _PreviewPageState extends BaseState<PreviewPage> {
 
   //构建视频预览
   Widget _buildVideoPreview(BuildContext context, PreviewOptionItem item) {
-    return EmptyBox();
+    return JVideoPlayer.jFile(
+      file: item.file,
+      looping: true,
+      showOptions: false,
+      allowedScreenSleep: false,
+      allowPlaybackSpeedChanging: false,
+      backgroundColor: Colors.transparent,
+    );
   }
 
   //构建其他预览

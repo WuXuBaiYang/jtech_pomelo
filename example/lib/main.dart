@@ -43,29 +43,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ElevatedButton(
           child: const Text("测试"),
           onPressed: () {
-            jRouter.push(
-              (context, animation, secondaryAnimation) {
-
-                return PreviewPage(
-                  items: [
-                    PreviewOptionItem.image(
-                      file: JFile.fromUrl(
-                          "https://img.mianfeiwendang.com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg"),
-                    ),
-                    PreviewOptionItem.video(
-                      file: JFile.fromUrl(
-                          "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
-                    ),
-                    PreviewOptionItem.other(
-                      file: JFile.fromUrl(
-                          "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
-                    ),
-                  ],
-                );
-              },
-              opaque: false,
-              barrierColor: Colors.black87,
-            );
+            PreviewUtil.previewImages(imageList: [
+              "https://img.mianfeiwendang"
+                  ".com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg",
+              "https://img.mianfeiwendang"
+                  ".com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg",
+            ]);
+            // PreviewUtil.preview(
+            //   items: [
+            //     PreviewOptionItem.image(
+            //       file: JFile.fromUrl(
+            //           "https://img.mianfeiwendang.com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg"),
+            //     ),
+            //     PreviewOptionItem.video(
+            //       file: JFile.fromUrl(
+            //           "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
+            //     ),
+            //     PreviewOptionItem.other(
+            //       file: JFile.fromUrl(
+            //           "https://klxxcdn.oss-cn-hangzhou.aliyuncs.com/histudy/hrm/media/bg1.mp4"),
+            //     ),
+            //   ],
+            // );
           },
         ),
       ),

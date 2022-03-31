@@ -23,7 +23,7 @@ typedef ErrorBuilder = Widget Function(
     BuildContext context, Object? error, StackTrace? stackTrace);
 
 /*
-* 图片组件-状态
+* 图片组件
 * @author JTech JH
 * @Time 2022/3/30 17:08
 */

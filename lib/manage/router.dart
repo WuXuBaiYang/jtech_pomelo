@@ -194,7 +194,17 @@ class JRouter extends BaseManage {
       Animation<double> animation,
       Animation<double> secondaryAnimation,
       Widget child) {
-    return child;
+    var begin = const Offset(0, 1);
+    var end = Offset.zero;
+    var curve = Curves.ease;
+    var tween = Tween(
+      begin: begin,
+      end: end,
+    ).chain(CurveTween(curve: curve));
+    return SlideTransition(
+      child: child,
+      position: animation.drive(tween),
+    );
   }
 
   //页面退出
