@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
+import 'package:jtech_pomelo/widget/navigation/navigation_controller.dart';
+import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
+import 'package:jtech_pomelo/widget/navigation/navigation_pageview.dart';
+import 'package:jtech_pomelo/widget/navigation/tab_layout.dart';
 
 /*
 * 页面组件
@@ -43,6 +47,9 @@ class JAppPage extends BaseStatelessWidget {
   //fab按钮动画
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
+  //标题栏底部内容
+  final PreferredSizeWidget? appBarBottom;
+
   const JAppPage({
     Key? key,
     required this.body,
@@ -54,6 +61,7 @@ class JAppPage extends BaseStatelessWidget {
     this.floatingActionButtonLocation,
     this.bottomNavigationBar,
     this.floatingActionButtonAnimator,
+    this.appBarBottom,
     bool? showAppbar,
     LeadingType? leadingType,
     List<Widget>? actions,
@@ -61,6 +69,73 @@ class JAppPage extends BaseStatelessWidget {
         leadingType = leadingType ?? LeadingType.back,
         actions = actions ?? const [],
         super(key: key);
+
+  //顶部导航组件
+  JAppPage.tabLayout({
+    Key? key,
+    required NavigationController<NavigationItem> controller,
+    Color? tabBarColor,
+    double tabBarHeight = 55,
+    double? elevation,
+    bool? isFixed,
+    ShapeBorder? shape,
+    EdgeInsetsGeometry? margin,
+    Color? labelColor,
+    Color? unselectedLabelColor,
+    Decoration? indicator,
+    Color? indicatorColor,
+    EdgeInsetsGeometry? indicatorPadding,
+    double? indicatorWeight,
+    TabBarIndicatorSize? indicatorSize,
+    bool? canScroll,
+    Duration? duration,
+    //基础参数
+    PreferredSizeWidget? appBar,
+    bool? showAppbar,
+    Widget? leading,
+    LeadingType? leadingType,
+    Widget? title,
+    List<Widget>? actions,
+    Color? backgroundColor,
+    Widget? bottomNavigationBar,
+    Widget? floatingActionButton,
+    FloatingActionButtonLocation? floatingActionButtonLocation,
+    FloatingActionButtonAnimator? floatingActionButtonAnimator,
+  }) : this(
+          key: key,
+          appBar: appBar,
+          showAppbar: showAppbar,
+          appBarBottom: JTabLayout.appBarBottom(
+            controller: controller,
+            labelColor: labelColor,
+            unselectedLabelColor: unselectedLabelColor,
+            indicator: indicator,
+            indicatorSize: indicatorSize,
+            indicatorColor: indicatorColor,
+            tabBarColor: tabBarColor,
+            tabBarHeight: tabBarHeight,
+            elevation: elevation,
+            isFixed: isFixed,
+            margin: margin,
+            shape: shape,
+            indicatorPadding: indicatorPadding,
+            indicatorWeight: indicatorWeight,
+          ),
+          body: JNavigationPageView(
+            controller: controller,
+            canScroll: canScroll,
+            duration: duration,
+          ),
+          leading: leading,
+          leadingType: leadingType,
+          title: title,
+          actions: actions,
+          backgroundColor: backgroundColor,
+          bottomNavigationBar: bottomNavigationBar,
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
+          floatingActionButtonAnimator: floatingActionButtonAnimator,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +158,7 @@ class JAppPage extends BaseStatelessWidget {
       leading: leading,
       title: title,
       actions: actions,
+      bottom: appBarBottom,
     );
   }
 }
