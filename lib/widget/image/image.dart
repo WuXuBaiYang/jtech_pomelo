@@ -146,11 +146,11 @@ class JImage extends BaseStatefulWidget {
                   file.uri,
                   cacheKey: cacheKey,
                   headers: headers,
-                  cacheRawData: cacheRawData,
+                  cacheRawData: null != editorConfig ? true : cacheRawData,
                 )
               : ExtendedFileImageProvider(
                   file.file!,
-                  cacheRawData: cacheRawData,
+                  cacheRawData: null != editorConfig ? true : cacheRawData,
                 ) as ImageProvider,
           width: width,
           height: height,
@@ -197,7 +197,7 @@ class JImage extends BaseStatefulWidget {
   }) : this.file(
           File(path),
           key: key,
-          cacheRawData: cacheRawData,
+          cacheRawData: null != editorConfig ? true : cacheRawData,
           width: width,
           height: height,
           fit: fit,
@@ -244,7 +244,7 @@ class JImage extends BaseStatefulWidget {
           key: key,
           image: ExtendedFileImageProvider(
             file,
-            cacheRawData: cacheRawData,
+            cacheRawData: null != editorConfig ? true : cacheRawData,
           ),
           width: width,
           height: height,
@@ -296,7 +296,7 @@ class JImage extends BaseStatefulWidget {
             name,
             bundle: bundle,
             package: package,
-            cacheRawData: cacheRawData,
+            cacheRawData: null != editorConfig ? true : cacheRawData,
           ),
           width: width,
           height: height,
@@ -418,7 +418,7 @@ class JImage extends BaseStatefulWidget {
         );
 
   @override
-  State<StatefulWidget> createState() => _JImageState();
+  State<StatefulWidget> createState() => JImageState();
 }
 
 /*
@@ -426,7 +426,7 @@ class JImage extends BaseStatefulWidget {
 * @author JTech JH
 * @Time 2022/3/30 17:08
 */
-class _JImageState extends BaseState<JImage> {
+class JImageState extends BaseState<JImage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

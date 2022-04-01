@@ -23,7 +23,7 @@ class PreviewOptionItem extends OptionItem {
   }) : super(
           text: text ?? "",
           id: id,
-          enable: enable ?? true,
+          enable: enable,
         );
 
   //图片类型附件

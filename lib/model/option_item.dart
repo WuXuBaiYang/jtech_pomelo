@@ -18,6 +18,6 @@ class OptionItem extends BaseModel {
   OptionItem({
     required this.text,
     this.id,
-    this.enable = true,
-  });
+    bool? enable,
+  }) : enable = enable ?? true;
 }

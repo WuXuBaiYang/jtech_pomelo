@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
       navigatorKey: jRouter.navigateKey,
       title: 'JTech Pomelo Example',
       home: const MyHomePage(title: 'JTech Pomelo Example'),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
+      ),
     );
   }
 }
@@ -33,6 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  dynamic image;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +45,20 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text("测试"),
-          onPressed: () {
-            JPickerUtil.pickImage(context).then((value) async {
-              var r = await JImageUtil.compressFile(value.singleFile!.file!);
-              print("");
-            });
-          },
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: const Text("测试"),
+              onPressed: () async {
+                image = await JImageUtil.cropUrl(
+                    url: "https://img"
+                        ".mianfeiwendang"
+                        ".com/pic/65133e4129b6446aa22c9f9f/1-810-jpg_6-1080-0-0-1080.jpg");
+                setState(() {});
+              },
+            ),
+            null != image ? JImage.jFile(image) : EmptyBox(),
+          ],
         ),
       ),
     );

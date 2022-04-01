@@ -1,5 +1,6 @@
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'dart:convert';
 import 'dart:math';
@@ -37,6 +38,10 @@ class JUtil {
   //获取状态栏高度
   static double getStatusBarHeight(BuildContext context) =>
       MediaQuery.of(context).padding.top;
+
+  //获取应用主题色
+  static Color getAccentColor(BuildContext context) =>
+      Theme.of(context).colorScheme.primary;
 }
 
 //判断当前是否为debug状态

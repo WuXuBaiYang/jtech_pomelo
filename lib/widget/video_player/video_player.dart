@@ -222,7 +222,7 @@ class JVideoPlayer extends BaseStatefulWidget {
         );
 
   @override
-  State<StatefulWidget> createState() => _JVideoPlayerState();
+  State<StatefulWidget> createState() => JVideoPlayerState();
 }
 
 /*
@@ -230,7 +230,7 @@ class JVideoPlayer extends BaseStatefulWidget {
 * @author JTech JH
 * @Time 2022/3/31 15:40
 */
-class _JVideoPlayerState extends BaseState<JVideoPlayer> {
+class JVideoPlayerState extends BaseState<JVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return JFutureBuilder<bool>(

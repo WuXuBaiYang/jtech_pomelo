@@ -52,7 +52,7 @@ class PickerMenuItem extends MenuItem {
         super(
           text: text,
           id: id,
-          enable: enable ?? true,
+          enable: enable,
           subText: subText,
           icon: icon,
         );

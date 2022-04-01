@@ -6,19 +6,27 @@ import 'package:jtech_pomelo/model/option_item.dart';
 * @author JTech JH
 * @Time 2022/3/29 16:20
 */
-class MenuItem extends OptionItem {
+class MenuItem<V> extends OptionItem {
   //副标题
   final String? subText;
 
   //图标
   final Widget? icon;
 
+  //携带值
+  final V? value;
+
   MenuItem({
-    required String text,
-    String? id,
-    bool enable = true,
-    //基础参数
     this.subText,
     this.icon,
-  }) : super(text: text, id: id, enable: enable);
+    this.value,
+    //基础参数
+    required String text,
+    String? id,
+    bool? enable,
+  }) : super(
+          text: text,
+          id: id,
+          enable: enable,
+        );
 }

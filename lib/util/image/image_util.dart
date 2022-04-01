@@ -3,7 +3,11 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:jtech_pomelo/pomelo.dart';
+import 'package:jtech_pomelo/manage/router.dart';
+import 'package:jtech_pomelo/util/file_util.dart';
+import 'package:jtech_pomelo/util/image/editor_page.dart';
+import 'package:jtech_pomelo/util/picker/file_info.dart';
+import 'package:jtech_pomelo/util/util.dart';
 
 /*
 * 图片工具方法
@@ -116,7 +120,56 @@ class JImageUtil {
     );
   }
 
-// //图片裁剪
-// static Future<File> clip(){
-// }
+  //图片裁剪
+  static Future<JFile?>? crop({
+    required JFile file,
+    double? maxScale,
+    double? initialCropRatio,
+    bool? enableRatioMenu,
+  }) {
+    //默认值
+    maxScale ??= 3.0;
+    initialCropRatio ??= -1.0;
+    enableRatioMenu ??= true;
+    return jRouter.push<JFile>((_, anim, secAnim) {
+      return ImageEditorPage(
+        file: file,
+        maxScale: maxScale!,
+        initialCropRatio: initialCropRatio!,
+        enableRatioMenu: enableRatioMenu!,
+      );
+    });
+  }
+
+  //图片裁剪-网络地址
+  static Future<JFile?>? cropUrl({
+    required String url,
+    //默认字段
+    double? maxScale,
+    double? initialCropRatio,
+    bool? enableRatioMenu,
+  }) {
+    return crop(
+      file: JFile.fromUrl(url),
+      maxScale: maxScale,
+      initialCropRatio: initialCropRatio,
+      enableRatioMenu: enableRatioMenu,
+    );
+  }
+
+  //图片裁剪-本地路径
+  static Future<JFile?>? cropPath({
+    required String path,
+    //默认字段
+    double? maxScale,
+    double? initialCropRatio,
+    bool? enableRatioMenu,
+  }) async {
+    return crop(
+      file: await JFile.fromPath(path),
+      maxScale: maxScale,
+      initialCropRatio: initialCropRatio,
+      enableRatioMenu: enableRatioMenu,
+    );
+  }
 }

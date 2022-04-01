@@ -1,9 +1,9 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/base/base_page.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
 import 'package:jtech_pomelo/manage/router.dart';
 import 'package:jtech_pomelo/util/preview/options_item.dart';
-import 'package:jtech_pomelo/widget/empty_box.dart';
 import 'package:jtech_pomelo/widget/image/image.dart';
 import 'package:jtech_pomelo/widget/video_player/video_player.dart';
 
@@ -16,7 +16,7 @@ typedef PreviewItemBuilder = Widget? Function(
 * @author JTech JH
 * @Time 2022/3/30 13:59
 */
-class PreviewPage extends BaseStatefulWidget {
+class PreviewPage extends BaseStatefulPage {
   //附件预览构造器
   final PreviewItemBuilder? itemBuilder;
 
