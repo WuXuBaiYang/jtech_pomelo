@@ -47,9 +47,11 @@ export 'util/toast_util.dart';
 export 'util/util.dart';
 
 //组件
+export 'widget/app_root/app_root.dart';
 export 'widget/image/clip.dart';
 export 'widget/image/image.dart';
 export 'widget/video_player/video_player.dart';
+export 'widget/app_page.dart';
 export 'widget/empty_box.dart';
 export 'widget/future_builder.dart';
 

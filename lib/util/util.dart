@@ -1,6 +1,8 @@
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/manage/event.dart';
+import 'package:jtech_pomelo/model/theme_event.dart';
 import 'package:path/path.dart' as path;
 import 'dart:convert';
 import 'dart:math';
@@ -44,9 +46,12 @@ class JUtil {
       Theme.of(context).colorScheme.primary;
 }
 
-//判断当前是否为debug状态
-bool get debugMode =>
-    !const bool.fromEnvironment("dart.vm.product", defaultValue: false);
+//debug模式状态
+late bool debugMode = true;
+
+//更新全局样式
+void updateGlobalTheme(ThemeData themeData) =>
+    jEvent.send(ThemeEvent(themeData: themeData));
 
 //将map转为query的url
 String toQueryUrl(String url, Map<String, dynamic> params) {
