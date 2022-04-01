@@ -12,7 +12,7 @@ import 'package:jtech_pomelo/util/sheet_util.dart';
 * @author JTech JH
 * @Time 2022/3/29 17:00
 */
-class PickerUtil {
+class JPickerUtil {
   //选择图片附件
   static Future<JPickerResult> pickImage(
     BuildContext context, {

@@ -10,7 +10,7 @@ import 'package:jtech_pomelo/util/preview/preview_page.dart';
 * @author JTech JH
 * @Time 2022/3/30 13:55
 */
-class PreviewUtil {
+class JPreviewUtil {
   //附件预览基本方法
   static Future<void>? preview({
     required List<PreviewOptionItem> items,

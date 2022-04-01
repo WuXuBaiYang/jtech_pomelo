@@ -27,6 +27,7 @@ export 'net/request.dart';
 export 'net/response.dart';
 
 //工具方法
+export 'util/image/image_util.dart';
 export 'util/picker/file_info.dart';
 export 'util/picker/menu_item.dart';
 export 'util/picker/picker_util.dart';
@@ -58,3 +59,4 @@ export 'package:extended_image/src/utils.dart';
 export 'package:extended_image/src/gesture/utils.dart';
 export 'package:extended_image/src/editor/editor_utils.dart';
 export 'package:chewie/src/models/subtitle_model.dart';
+export 'package:flutter_image_compress/src/compress_format.dart';
