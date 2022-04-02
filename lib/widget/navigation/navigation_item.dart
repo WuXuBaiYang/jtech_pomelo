@@ -16,20 +16,20 @@ class NavigationItem extends BaseModel {
   //选中状态子项标题
   final Widget? activeTitle;
 
-  //导航子项图片
-  final Widget? image;
+  //导航子项图标
+  final Widget? icon;
 
-  //选中状态子项图片
-  final Widget? activeImage;
+  //选中状态子项图标
+  final Widget? activeIcon;
 
   NavigationItem({
     required this.page,
     this.title,
     Widget? activeTitle,
-    this.image,
-    Widget? activeImage,
+    this.icon,
+    Widget? activeIcon,
   })  : activeTitle = activeTitle ?? title,
-        activeImage = activeImage ?? image;
+        activeIcon = activeIcon ?? icon;
 
   //文本子项
   NavigationItem.text({
@@ -40,9 +40,9 @@ class NavigationItem extends BaseModel {
     String? activeTitle,
     double? activeFontSize,
     Color? activeTitleColor,
-    this.image,
-    Widget? activeImage,
-  })  : activeImage = activeImage ?? image,
+    this.icon,
+    Widget? activeIcon,
+  })  : activeIcon = activeIcon ?? icon,
         title = Text(
           title,
           style: TextStyle(

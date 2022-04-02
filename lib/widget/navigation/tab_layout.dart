@@ -181,7 +181,7 @@ class _JTabLayoutState extends BaseState<JTabLayout>
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          (selected ? item.activeImage : item.image) ?? const EmptyBox(),
+          (selected ? item.activeIcon : item.icon) ?? const EmptyBox(),
           (selected ? item.activeTitle : item.title) ?? const EmptyBox(),
         ],
       ),

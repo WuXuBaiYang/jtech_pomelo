@@ -5,6 +5,8 @@ import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_pageview.dart';
 import 'package:jtech_pomelo/widget/navigation/tab_layout.dart';
 
+import 'navigation/bottom_bar.dart';
+
 /*
 * 页面组件
 * @author JTech JH
@@ -132,6 +134,59 @@ class JAppPage extends BaseStatelessWidget {
           actions: actions,
           backgroundColor: backgroundColor,
           bottomNavigationBar: bottomNavigationBar,
+          floatingActionButton: floatingActionButton,
+          floatingActionButtonLocation: floatingActionButtonLocation,
+          floatingActionButtonAnimator: floatingActionButtonAnimator,
+        );
+
+  //底部导航组件
+  JAppPage.bottomBar({
+    Key? key,
+    required NavigationController<NavigationItem> controller,
+    double navigationHeight = 60,
+    Color? navigationColor,
+    double? elevation,
+    NotchLocation? notchLocation,
+    double? notchMargin,
+    NotchedShape? notchedShape,
+    bool? canScroll,
+    Duration? duration,
+    //基础参数
+    PreferredSizeWidget? appBar,
+    bool? showAppbar,
+    PreferredSizeWidget? appBarBottom,
+    Widget? leading,
+    LeadingType? leadingType,
+    Widget? title,
+    List<Widget>? actions,
+    Color? backgroundColor,
+    Widget? floatingActionButton,
+    FloatingActionButtonLocation? floatingActionButtonLocation,
+    FloatingActionButtonAnimator? floatingActionButtonAnimator,
+  }) : this(
+          key: key,
+          appBar: appBar,
+          showAppbar: showAppbar,
+          appBarBottom: appBarBottom,
+          body: JNavigationPageView(
+            controller: controller,
+            canScroll: canScroll,
+            duration: duration,
+          ),
+          leading: leading,
+          leadingType: leadingType,
+          title: title,
+          actions: actions,
+          backgroundColor: backgroundColor,
+          bottomNavigationBar: JBottomBar.bottomNavigationBar(
+            controller: controller,
+            navigationHeight: navigationHeight,
+            navigationColor: navigationColor,
+            elevation: elevation,
+            notchLocation: notchLocation,
+            notchMargin: notchMargin,
+            notchedShape: notchedShape,
+          ),
           floatingActionButton: floatingActionButton,
           floatingActionButtonLocation: floatingActionButtonLocation,
           floatingActionButtonAnimator: floatingActionButtonAnimator,

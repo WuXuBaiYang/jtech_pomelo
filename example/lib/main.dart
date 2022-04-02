@@ -26,16 +26,18 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  bool dark = false;
-
   var controller = NavigationController(items: [
     NavigationItem.text(
         title: "页面一",
+        activeTitle: "aaaa",
+        icon: Icon(Icons.home),
         page: Center(
           child: Text("页面一"),
         )),
     NavigationItem.text(
         title: "页面二",
+        activeTitle: "aaaa",
+        icon: Icon(Icons.my_library_add_outlined),
         page: Center(
           child: Text("页面二"),
         )),
@@ -43,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return JAppPage.tabLayout(
+    return JAppPage.bottomBar(
       controller: controller,
       title: Text(widget.title),
       // body: Center(
