@@ -48,6 +48,8 @@ export 'util/util.dart';
 
 //组件
 export 'widget/app_root/app_root.dart';
+export 'widget/badge/badge.dart';
+export 'widget/badge/controller.dart';
 export 'widget/image/clip.dart';
 export 'widget/image/image.dart';
 export 'widget/navigation/navigation_controller.dart';

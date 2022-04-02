@@ -42,21 +42,37 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text("页面二"),
         )),
   ]);
+  var c = JBadgeController();
 
   @override
   Widget build(BuildContext context) {
-    return JAppPage.bottomBar(
-      controller: controller,
+    return JAppPage(
+      //   return JAppPage.bottomBar(
+      // controller: controller,
       title: Text(widget.title),
-      // body: Center(
-      //   child: ElevatedButton(
-      //     onPressed: () {
-      //       updateGlobalTheme(dark ? ThemeData.light() : ThemeData.dark());
-      //       dark = !dark;
-      //     },
-      //     child: const Text("测试"),
-      //   ),
-      // ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            JBadge(
+              controller: c,
+              align: Alignment.bottomCenter,
+              child: ElevatedButton(
+                onPressed: () {
+                  c.setValue("xxx");
+                },
+                child: const Text("测试"),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                c.clear();
+              },
+              child: const Text("清空"),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
