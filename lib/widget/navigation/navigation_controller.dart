@@ -1,4 +1,5 @@
 import 'package:jtech_pomelo/base/base_controller.dart';
+import 'package:jtech_pomelo/widget/navigation/navigation_badge.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
 
 /*
@@ -6,8 +7,8 @@ import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
 * @author JTech JH
 * @Time 2022/4/1 16:34
 */
-class NavigationController<T extends NavigationItem>
-    extends BaseController<int> {
+class NavigationController<T extends NavigationItem> extends BaseController<int>
+    with NavigationBadgeController {
   //导航子项集合
   final List<T> items;
 
@@ -31,7 +32,6 @@ class NavigationController<T extends NavigationItem>
 
   @override
   void dispose() {
-    //销毁数据
     items.clear();
     super.dispose();
   }

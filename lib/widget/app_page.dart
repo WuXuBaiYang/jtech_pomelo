@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
+import 'package:jtech_pomelo/widget/badge/badger.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_controller.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_pageview.dart';
@@ -91,6 +92,8 @@ class JAppPage extends BaseStatelessWidget {
     TabBarIndicatorSize? indicatorSize,
     bool? canScroll,
     Duration? duration,
+    //角标参数
+    JBadger? badger,
     //基础参数
     PreferredSizeWidget? appBar,
     bool? showAppbar,
@@ -122,6 +125,7 @@ class JAppPage extends BaseStatelessWidget {
             shape: shape,
             indicatorPadding: indicatorPadding,
             indicatorWeight: indicatorWeight,
+            badger: badger,
           ),
           body: JNavigationPageView(
             controller: controller,
@@ -151,6 +155,8 @@ class JAppPage extends BaseStatelessWidget {
     NotchedShape? notchedShape,
     bool? canScroll,
     Duration? duration,
+    //角标参数
+    JBadger? badger,
     //基础参数
     PreferredSizeWidget? appBar,
     bool? showAppbar,
@@ -186,6 +192,7 @@ class JAppPage extends BaseStatelessWidget {
             notchLocation: notchLocation,
             notchMargin: notchMargin,
             notchedShape: notchedShape,
+            badger: badger,
           ),
           floatingActionButton: floatingActionButton,
           floatingActionButtonLocation: floatingActionButtonLocation,

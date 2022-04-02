@@ -42,9 +42,6 @@ class ListValueChangeNotifier<V> extends ValueChangeNotifier<List<V>> {
 
   ListValueChangeNotifier.empty() : this([]);
 
-  //清除数据
-  void clear() => value.clear();
-
   //获取数据长度
   int get length => value.length;
 
@@ -53,6 +50,12 @@ class ListValueChangeNotifier<V> extends ValueChangeNotifier<List<V>> {
 
   //判断是否非空
   bool get isNotEmpty => value.isNotEmpty;
+
+  //清除数据
+  void clear() {
+    value.clear();
+    update(true);
+  }
 
   //获取子项
   V? getItem(int index) {
@@ -99,8 +102,8 @@ class ListValueChangeNotifier<V> extends ValueChangeNotifier<List<V>> {
 
   @override
   void dispose() {
-    super.dispose();
     value.clear();
+    super.dispose();
   }
 }
 
@@ -115,7 +118,10 @@ class MapValueChangeNotifier<K, V> extends ValueChangeNotifier<Map<K, V>> {
   MapValueChangeNotifier.empty() : this({});
 
   //清除数据
-  void clear() => value.clear();
+  void clear() {
+    value.clear();
+    update(true);
+  }
 
   //添加数据
   void putValue(K k, V v, {bool notify = true}) {
@@ -135,7 +141,7 @@ class MapValueChangeNotifier<K, V> extends ValueChangeNotifier<Map<K, V>> {
 
   @override
   void dispose() {
-    super.dispose();
     value.clear();
+    super.dispose();
   }
 }

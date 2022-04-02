@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/base/base_widget.dart';
+import 'package:jtech_pomelo/pomelo.dart';
+import 'package:jtech_pomelo/widget/badge/badge.dart';
+import 'package:jtech_pomelo/widget/badge/badger.dart';
 import 'package:jtech_pomelo/widget/empty_box.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_controller.dart';
 import 'package:jtech_pomelo/widget/navigation/navigation_item.dart';
@@ -52,8 +55,14 @@ class JTabLayout extends BaseStatefulWidget {
   //指示器尺寸
   final TabBarIndicatorSize? indicatorSize;
 
+  //角标参数
+  final JBadger badger;
+
   const JTabLayout({
     Key? key,
+    //角标组件参数
+    JBadger? badger,
+    //基础参数
     required this.controller,
     this.labelColor,
     this.unselectedLabelColor,
@@ -75,10 +84,15 @@ class JTabLayout extends BaseStatefulWidget {
         shape = shape ?? const RoundedRectangleBorder(),
         indicatorPadding = indicatorPadding ?? EdgeInsets.zero,
         indicatorWeight = indicatorWeight ?? 2.0,
+        badger = badger ?? const JBadger(),
         super(key: key);
 
   //构建标题栏底部结构导航栏
   static PreferredSize appBarBottom({
+    Key? key,
+    //角标参数
+    JBadger? badger,
+    //基础参数
     required NavigationController<NavigationItem> controller,
     Color? tabBarColor,
     double tabBarHeight = 55,
@@ -97,6 +111,8 @@ class JTabLayout extends BaseStatefulWidget {
     return PreferredSize(
       preferredSize: Size.fromHeight(tabBarHeight),
       child: JTabLayout(
+        key: key,
+        badger: badger,
         controller: controller,
         labelColor: labelColor,
         unselectedLabelColor: unselectedLabelColor,
@@ -135,8 +151,8 @@ class _JTabLayoutState extends BaseState<JTabLayout>
     //初始化顶部导航控制器
     tabController = TabController(
       length: widget.controller.itemLength,
-      vsync: this,
       initialIndex: widget.controller.value,
+      vsync: this,
     );
     //监听页码下标变化
     widget.controller.addListener(() {
@@ -163,8 +179,9 @@ class _JTabLayoutState extends BaseState<JTabLayout>
           indicatorWeight: widget.indicatorWeight,
           indicatorSize: widget.indicatorSize,
           onTap: (index) => widget.controller.select(index),
-          tabs: List.generate(
-              widget.controller.itemLength, (index) => _buildTabBarItem(index)),
+          tabs: List.generate(widget.controller.itemLength, (index) {
+            return _buildTabBarItem(index);
+          }),
         );
       },
     );
@@ -174,17 +191,29 @@ class _JTabLayoutState extends BaseState<JTabLayout>
   _buildTabBarItem(int index) {
     var item = widget.controller.getItem(index);
     bool selected = index == widget.controller.value;
-    return Container(
-      height: widget.tabBarHeight,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          (selected ? item.activeIcon : item.icon) ?? const EmptyBox(),
-          (selected ? item.activeTitle : item.title) ?? const EmptyBox(),
-        ],
-      ),
+    return ValueListenableBuilder<Map<int, String>>(
+      valueListenable: widget.controller.navigationBadgeMap,
+      builder: (_, value, child) {
+        var badgeValue = value[index] ?? "";
+        return JBadge(
+          controller: JBadgeController(
+            initialValue: badgeValue,
+          ),
+          badger: widget.badger,
+          child: Container(
+            height: widget.tabBarHeight,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                (selected ? item.activeIcon : item.icon) ?? const EmptyBox(),
+                (selected ? item.activeTitle : item.title) ?? const EmptyBox(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

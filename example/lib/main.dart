@@ -29,50 +29,60 @@ class _MyHomePageState extends State<MyHomePage> {
   var controller = NavigationController(items: [
     NavigationItem.text(
         title: "页面一",
-        activeTitle: "aaaa",
         icon: Icon(Icons.home),
         page: Center(
           child: Text("页面一"),
         )),
     NavigationItem.text(
         title: "页面二",
-        activeTitle: "aaaa",
         icon: Icon(Icons.my_library_add_outlined),
         page: Center(
           child: Text("页面二"),
         )),
   ]);
-  var c = JBadgeController();
 
   @override
   Widget build(BuildContext context) {
-    return JAppPage(
-      //   return JAppPage.bottomBar(
-      // controller: controller,
-      title: Text(widget.title),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            JBadge(
-              controller: c,
-              align: Alignment.bottomCenter,
-              child: ElevatedButton(
-                onPressed: () {
-                  c.setValue("xxx");
-                },
-                child: const Text("测试"),
-              ),
+    // return JAppPage(
+    return JAppPage.bottomBar(
+      actions: [
+        TextButton(
+          child: const Text(
+            "测试",
+            style: TextStyle(
+              color: Colors.white,
             ),
-            ElevatedButton(
-              onPressed: () {
-                c.clear();
-              },
-              child: const Text("清空"),
-            )
-          ],
+          ),
+          onPressed: () {
+            // controller.addBadge(1, "1");
+            controller.clearAllBadges();
+          },
         ),
-      ),
+      ],
+      controller: controller,
+      title: Text(widget.title),
+      // body: Center(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       JBadge(
+      //         controller: c,
+      //         child: ElevatedButton(
+      //           onPressed: () {
+      //             c.setValue("xxx");
+      //           },
+      //           child: const Text("测试"),
+      //         ),
+      //       ),
+      //       ElevatedButton(
+      //         onPressed: () {
+      //           c.clear();
+      //         },
+      //         child: const Text("清空"),
+      //       )
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
