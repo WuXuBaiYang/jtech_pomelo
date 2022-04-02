@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 * @Time 2022/3/31 14:27
 */
 abstract class ImageClip {
+  const ImageClip();
+
   //裁剪方法
   Widget clip(BuildContext context, Widget child);
 }
@@ -22,7 +24,7 @@ class ImageClipOval extends ImageClip {
   //裁剪方法
   final Clip clipBehavior;
 
-  ImageClipOval({
+  const ImageClipOval({
     this.clipper,
     this.clipBehavior = Clip.antiAlias,
   });
@@ -52,7 +54,7 @@ class ImageClipRRect extends ImageClip {
   //裁剪方法
   final Clip clipBehavior;
 
-  ImageClipRRect({
+  const ImageClipRRect({
     required this.borderRadius,
     this.clipper,
     this.clipBehavior = Clip.antiAlias,

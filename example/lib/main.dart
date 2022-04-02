@@ -26,63 +26,23 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  var controller = NavigationController(items: [
-    NavigationItem.text(
-        title: "页面一",
-        icon: Icon(Icons.home),
-        page: Center(
-          child: Text("页面一"),
-        )),
-    NavigationItem.text(
-        title: "页面二",
-        icon: Icon(Icons.my_library_add_outlined),
-        page: Center(
-          child: Text("页面二"),
-        )),
-  ]);
-
   @override
   Widget build(BuildContext context) {
     // return JAppPage(
-    return JAppPage.bottomBar(
-      actions: [
-        TextButton(
-          child: const Text(
-            "测试",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-            // controller.addBadge(1, "1");
-            controller.clearAllBadges();
-          },
-        ),
-      ],
-      controller: controller,
+    return JAppPage(
       title: Text(widget.title),
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       JBadge(
-      //         controller: c,
-      //         child: ElevatedButton(
-      //           onPressed: () {
-      //             c.setValue("xxx");
-      //           },
-      //           child: const Text("测试"),
-      //         ),
-      //       ),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //           c.clear();
-      //         },
-      //         child: const Text("清空"),
-      //       )
-      //     ],
-      //   ),
-      // ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // ElevatedButton(
+            //   onPressed: () {
+            //   },
+            //   child: const Text("测试"),
+            // )
+          ],
+        ),
+      ),
     );
   }
 }
