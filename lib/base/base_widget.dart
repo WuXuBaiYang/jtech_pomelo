@@ -1,6 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
+//组件子项点击事件
+typedef ItemTap<T> = void Function(T item, int index);
+
+//组件子项构造器
+typedef ItemBuilder<T> = Widget Function(
+    BuildContext context, T item, int index);
+
 /*
 * 有状态组件基类
 * @author JTech JH

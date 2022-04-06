@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/base/base_widget.dart';
 import 'package:jtech_pomelo/manage/router.dart';
 import 'package:jtech_pomelo/util/match_util.dart';
 import 'package:jtech_pomelo/util/picker/file_info.dart';
@@ -14,7 +15,7 @@ class JPreviewUtil {
   //附件预览基本方法
   static Future<void>? preview({
     required List<PreviewOptionItem> items,
-    PreviewItemBuilder? itemBuilder,
+    ItemBuilder<PreviewOptionItem>? itemBuilder,
     int? initialIndex,
   }) {
     initialIndex ??= 0;
@@ -35,7 +36,7 @@ class JPreviewUtil {
   //预览图片集合
   static Future<void>? previewImages({
     required List<String> imageList,
-    PreviewItemBuilder? itemBuilder,
+    ItemBuilder<PreviewOptionItem>? itemBuilder,
     int? initialIndex,
   }) async {
     List<PreviewOptionItem> items = [];
@@ -56,7 +57,7 @@ class JPreviewUtil {
   //预览视频集合
   static Future<void>? previewVideos({
     required List<String> videoList,
-    PreviewItemBuilder? itemBuilder,
+    ItemBuilder<PreviewOptionItem>? itemBuilder,
     int? initialIndex,
   }) async {
     List<PreviewOptionItem> items = [];

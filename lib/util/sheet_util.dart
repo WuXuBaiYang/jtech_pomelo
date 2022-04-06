@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jtech_pomelo/base/base_widget.dart';
 import 'package:jtech_pomelo/model/menu_item.dart';
-import 'package:jtech_pomelo/pomelo.dart';
-
-//菜单项点击事件
-typedef OnMenuItemTap<T extends MenuItem> = void Function(T? item, int index);
+import 'package:jtech_pomelo/widget/empty_box.dart';
 
 /*
 * 底部弹出工具方法
@@ -94,7 +92,7 @@ class JSheetUtil {
     bool? showDivider,
     TextStyle? titleStyle,
     TextStyle? subTitleStyle,
-    OnMenuItemTap<T>? onItemTap,
+    ItemTap<T>? onItemTap,
     EdgeInsetsGeometry? padding,
     //通用参数
     Color? backgroundColor,

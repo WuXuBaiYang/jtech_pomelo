@@ -7,10 +7,6 @@ import 'package:jtech_pomelo/util/preview/options_item.dart';
 import 'package:jtech_pomelo/widget/image/image.dart';
 import 'package:jtech_pomelo/widget/video_player/video_player.dart';
 
-//自定义类型附件预览回调,返回值非空则替代默认预览方式
-typedef PreviewItemBuilder = Widget? Function(
-    PreviewOptionItem item, int index);
-
 /*
 * 附件预览页面
 * @author JTech JH
@@ -18,7 +14,7 @@ typedef PreviewItemBuilder = Widget? Function(
 */
 class PreviewPage extends BaseStatefulPage {
   //附件预览构造器
-  final PreviewItemBuilder? itemBuilder;
+  final ItemBuilder<PreviewOptionItem>? itemBuilder;
 
   //预览项集合
   final List<PreviewOptionItem> items;
@@ -52,7 +48,7 @@ class _PreviewPageState extends BaseState<PreviewPage> {
         child: ExtendedImageGesturePageView.builder(
           itemBuilder: (_, i) {
             var item = widget.items[i];
-            var child = widget.itemBuilder?.call(item, i);
+            var child = widget.itemBuilder?.call(context, item, i);
             if (null != child) return child;
             switch (item.type) {
               case PreviewType.image: //图片预览
