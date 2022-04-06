@@ -19,6 +19,7 @@ export 'manage/router.dart';
 //实体类
 export 'model/menu_item.dart';
 export 'model/option_item.dart';
+export 'model/select_item.dart';
 
 //网络模块方法
 export 'net/api_cancel.dart';
@@ -52,6 +53,14 @@ export 'widget/badge/badge.dart';
 export 'widget/badge/controller.dart';
 export 'widget/banner/banner.dart';
 export 'widget/banner/banner_item.dart';
+export 'widget/form/field_item/field_custom.dart';
+export 'widget/form/field_item/field_datepicker.dart';
+export 'widget/form/field_item/field_file.dart';
+export 'widget/form/field_item/field_item.dart';
+export 'widget/form/field_item/field_selector.dart';
+export 'widget/form/field_item/field_text.dart';
+export 'widget/form/controller.dart';
+export 'widget/form/form.dart';
 export 'widget/image/clip.dart';
 export 'widget/image/image.dart';
 export 'widget/navigation/navigation_controller.dart';
@@ -60,6 +69,7 @@ export 'widget/video_player/video_player.dart';
 export 'widget/app_page.dart';
 export 'widget/avatar.dart';
 export 'widget/empty_box.dart';
+export 'widget/empty_data_box.dart';
 export 'widget/future_builder.dart';
 
 //内部依赖包导出

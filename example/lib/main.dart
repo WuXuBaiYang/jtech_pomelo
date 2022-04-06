@@ -28,48 +28,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // return JAppPage(
     return JAppPage(
       title: Text(widget.title),
-      body: Center(
-        child: JBanner(
-          showTitle: true,
-          items: [
-            BannerItem(
-              enable: false,
-              child: JImage.net(
-                "http://static.runoob.com/images/demo/demo2"
-                ".jpg",
-                fit: BoxFit.cover,
+      body: JForm(
+        formBuilder: (context, controller) {
+          return Column(
+            children: [
+              JFormFieldText(
+                id: "name",
+                controller: controller,
+                initialValue: "aaaa",
+                targetId: "date",
+                targetChange: (f, value) {
+                  f?.didChange(JDateUtil.formatDate("yyyy-mm-dd", value));
+                },
               ),
-              text: "项目一",
-            ),
-            BannerItem(
-              child: JImage.net(
-                "https://img95.699pic.com/photo/40094/7630.jpg_wh300.jpg",
-                fit: BoxFit.cover,
+              JFormFieldDatePicker.dateTime(
+                id: "date",
+                controller: controller,
+                valueChange: (v) {
+                  print(v);
+                },
               ),
-              text: "项目二",
-            ),
-            BannerItem(
-              child: JImage.net(
-                "https://pic2.zhimg"
-                ".com/v2-4bba972a094eb1bdc8cbbc55e2bd4ddf_1440w.jpg?source=172ae18b",
-                fit: BoxFit.cover,
+              JFormFieldSelector(
+                id: "aa",
+                controller: controller,
+                items: [
+                  SelectItem.same(text: "aa"),
+                  SelectItem.same(text: "bb"),
+                ],
               ),
-              text: "项目三",
-            ),
-          ],
-        ),
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     ElevatedButton(
-        //       onPressed: () {},
-        //       child: const Text("测试"),
-        //     )
-        //   ],
-        // ),
+            ],
+          );
+        },
       ),
     );
   }
