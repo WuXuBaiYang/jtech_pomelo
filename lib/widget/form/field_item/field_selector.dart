@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/manage/router.dart';
-import 'package:jtech_pomelo/model/option_item.dart';
 import 'package:jtech_pomelo/model/select_item.dart';
 import 'package:jtech_pomelo/widget/empty_box.dart';
 import 'package:jtech_pomelo/widget/form/controller.dart';

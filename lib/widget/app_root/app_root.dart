@@ -8,6 +8,7 @@ import 'package:jtech_pomelo/manage/router.dart';
 import 'package:jtech_pomelo/model/theme_event.dart';
 import 'package:jtech_pomelo/util/util.dart';
 import 'package:jtech_pomelo/widget/app_root/chinese_cupertino_localizations.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /*
 * 应用入口组件
@@ -86,6 +87,7 @@ class _JAppRootState extends BaseState<JAppRoot> {
       //调试模式
       debugShowCheckedModeBanner: debugMode,
       localizationsDelegates: [
+        RefreshLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         ChineseCupertinoLocalizations.delegate,

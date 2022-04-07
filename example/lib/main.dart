@@ -30,27 +30,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return JAppPage(
       title: Text(widget.title),
-      body: JGridView<String>(
-        itemBuilder: (BuildContext context, item, int index) {
-          if (index == 0) {
-            return StaggeredGridTile.fit(
-              crossAxisCellCount: 2,
-              child: Container(
-                color: Colors.green,
-                child: Text(item),
-              ),
-            );
-          }
-          return Container(
-            color: Colors.orange,
-            child: Text(item),
-          );
-        },
-        crossAxisCount: 3,
-        controller: GridViewController(
-          dateList: ["a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e",],
-        ),
-      ),
+      body: EmptyBox(),
+      // body: JGridView<String>(
+      //   itemBuilder: (BuildContext context, item, int index) {
+      //     if (index == 0) {
+      //       return StaggeredGridTile.fit(
+      //         crossAxisCellCount: 2,
+      //         child: Container(
+      //           color: Colors.green,
+      //           child: Text(item),
+      //         ),
+      //       );
+      //     }
+      //     return Container(
+      //       color: Colors.orange,
+      //       child: Text(item),
+      //     );
+      //   },
+      //   crossAxisCount: 3,
+      //   controller: GridViewController(
+      //     dateList: ["a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e",],
+      //   ),
+      // ),
       // body: JForm(
       //   formBuilder: (context, controller) {
       //     return Column(
@@ -85,4 +86,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
     );
   }
+}
+
+class City extends BaseIndexModel {
+  final String name;
+
+  City(this.name) : super.create(tag: name);
 }
