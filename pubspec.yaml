@@ -71,6 +71,9 @@ dependencies:
   # 拼音库
   lpinyin: ^2.0.3
 
+  # 字体/图标库
+  font_awesome_flutter: ^10.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
