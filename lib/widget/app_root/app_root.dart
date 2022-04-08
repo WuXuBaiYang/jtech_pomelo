@@ -115,8 +115,9 @@ typedef AppPageLoad = Future<Widget> Function();
 */
 Future<void> runJAppRoot({
   required String title,
-  required AppPageLoad pageLoad,
   required bool debug,
+  required Widget homePage,
+  AppPageLoad? pageLoad,
   AppInitialize? initialize,
   Map<String, WidgetBuilder>? routes,
   ThemeData? theme,
@@ -134,8 +135,6 @@ Future<void> runJAppRoot({
   await jRouter.init();
   //初始化用户自定义方法
   await initialize?.call();
-  //运行应用
-  var homePage = await pageLoad();
   runApp(JAppRoot(
     title: title,
     homePage: homePage,
@@ -147,4 +146,9 @@ Future<void> runJAppRoot({
     localizationsDelegates: localizationsDelegates,
     supportedLocales: supportedLocales,
   ));
+  //执行页面加载
+  var targetPage = await pageLoad?.call();
+  if (null != targetPage) {
+    jRouter.pushReplacement((_, anim, secAnim) => homePage);
+  }
 }
