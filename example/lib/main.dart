@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/pomelo.dart';
-import 'package:jtech_pomelo/widget/gridview/accessory/accessory_gridview.dart';
 
 void main() {
   runJAppRoot(
@@ -31,39 +30,52 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return JAppPage(
       title: Text(widget.title),
-      body: EmptyBox(),
-      // body: JForm(
-      //   formBuilder: (context, controller) {
-      //     return Column(
-      //       children: [
-      //         JFormFieldText(
-      //           id: "name",
-      //           controller: controller,
-      //           initialValue: "aaaa",
-      //           targetId: "date",
-      //           targetChange: (f, value) {
-      //             f?.didChange(JDateUtil.formatDate("yyyy-mm-dd", value));
-      //           },
-      //         ),
-      //         JFormFieldDatePicker.dateTime(
-      //           id: "date",
-      //           controller: controller,
-      //           valueChange: (v) {
-      //             print(v);
-      //           },
-      //         ),
-      //         JFormFieldSelector(
-      //           id: "aa",
-      //           controller: controller,
-      //           items: [
-      //             SelectItem.same(text: "aa"),
-      //             SelectItem.same(text: "bb"),
-      //           ],
-      //         ),
-      //       ],
-      //     );
-      //   },
-      // ),
+      body: JForm(
+        formBuilder: (context, controller) {
+          return Column(
+            children: [
+              JFormFieldText(
+                id: "name",
+                controller: controller,
+                initialValue: "aaaa",
+                targetId: "date",
+                targetChange: (f, value) {
+                  f?.didChange(JDateUtil.formatDate("yyyy-mm-dd", value));
+                },
+              ),
+              JFormFieldDatePicker.dateTime(
+                id: "date",
+                controller: controller,
+                valueChange: (v) {
+                  print(v);
+                },
+              ),
+              JFormFieldSelector(
+                id: "aa",
+                controller: controller,
+                items: [
+                  SelectItem.same(text: "aa"),
+                  SelectItem.same(text: "bb"),
+                ],
+              ),
+              JFormFieldFile(
+                id: "gg",
+                controller: controller,
+                pickerItems: [
+                  PickerMenuItem.image(text: "aaa"),
+                  PickerMenuItem.imageTake(text: "bbb"),
+                ],
+                fileUpload: (List<JFile> files, value) async {
+                  return FileUploadResult(value: value, files: files);
+                },
+                fileLoad: (Object? value) async {
+                  return [];
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
