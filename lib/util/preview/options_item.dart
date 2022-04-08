@@ -26,6 +26,23 @@ class PreviewOptionItem extends OptionItem {
           enable: enable,
         );
 
+  //由JFile确定类型附件
+  PreviewOptionItem.jFile({
+    required JFile file,
+    //基础方法
+    String? text,
+    String? id,
+    bool? enable,
+  }) : this(
+          file: file,
+          type: file.isImageType
+              ? PreviewType.image
+              : (file.isVideoType ? PreviewType.video : PreviewType.other),
+          text: text,
+          id: id,
+          enable: enable,
+        );
+
   //图片类型附件
   PreviewOptionItem.image({
     required JFile file,

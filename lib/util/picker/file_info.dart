@@ -73,9 +73,9 @@ class JFile {
   //从网络地址中加载
   static JFile fromUrl(
     String url, {
+    String? suffixes,
     String? name,
     int? length,
-    String? suffixes,
   }) =>
       JFile(
         uri: url,

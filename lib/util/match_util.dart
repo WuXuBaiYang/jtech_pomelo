@@ -18,23 +18,23 @@ class JMatchUtil {
 
   //判断是否为手机号格式
   static bool isPhoneNumber_86(String string) =>
-      hasMatch(JMatchReg.phoneNumber_86, string: string);
+      hasMatch(RegExp(JMatchReg.phoneNumber_86), string: string);
 
   //判断是否为邮箱格式
   static bool isEmailAddress(String string) =>
-      hasMatch(JMatchReg.emailAddress, string: string);
+      hasMatch(RegExp(JMatchReg.emailAddress), string: string);
 
   //判断是否为身份证格式
   static bool isIdCard(String string) =>
-      hasMatch(JMatchReg.idCard, string: string);
+      hasMatch(RegExp(JMatchReg.idCard), string: string);
 
   //判断是否为图片文件格式
   static bool isImageFile(String string) =>
-      hasMatch(JMatchReg.imageFileType, string: string);
+      hasMatch(RegExp(JMatchReg.imageFileType), string: string);
 
   //判断是否为视频文件格式
   static bool isVideoFile(String string) =>
-      hasMatch(JMatchReg.videoFileType, string: string);
+      hasMatch(RegExp(JMatchReg.videoFileType), string: string);
 }
 
 /*

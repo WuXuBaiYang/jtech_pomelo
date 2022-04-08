@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/pomelo.dart';
+import 'package:jtech_pomelo/widget/gridview/accessory/accessory_gridview.dart';
 
 void main() {
   runJAppRoot(
@@ -31,27 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return JAppPage(
       title: Text(widget.title),
       body: EmptyBox(),
-      // body: JGridView<String>(
-      //   itemBuilder: (BuildContext context, item, int index) {
-      //     if (index == 0) {
-      //       return StaggeredGridTile.fit(
-      //         crossAxisCellCount: 2,
-      //         child: Container(
-      //           color: Colors.green,
-      //           child: Text(item),
-      //         ),
-      //       );
-      //     }
-      //     return Container(
-      //       color: Colors.orange,
-      //       child: Text(item),
-      //     );
-      //   },
-      //   crossAxisCount: 3,
-      //   controller: GridViewController(
-      //     dateList: ["a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e","a", "b", "c", "d", "e",],
-      //   ),
-      // ),
       // body: JForm(
       //   formBuilder: (context, controller) {
       //     return Column(

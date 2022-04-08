@@ -6,16 +6,21 @@ import 'package:jtech_pomelo/util/match_util.dart';
 import 'package:jtech_pomelo/util/picker/file_info.dart';
 import 'package:jtech_pomelo/util/picker/menu_item.dart';
 import 'package:jtech_pomelo/util/picker/picker_util.dart';
+import 'package:jtech_pomelo/util/preview/options_item.dart';
+import 'package:jtech_pomelo/util/preview/preview_util.dart';
 import 'package:jtech_pomelo/widget/empty_box.dart';
 import 'package:jtech_pomelo/widget/gridview/accessory/controller.dart';
 import 'package:jtech_pomelo/widget/image/clip.dart';
 import 'package:jtech_pomelo/widget/image/image.dart';
+
+//附件预览回调
+typedef AccessoryPreview = void Function(List<JFile> items, int index);
+
 /*
 * 附件表格列表组件
 * @author JTech JH
 * @Time 2022/4/7 16:53
 */
-
 class JAccessoryGridView extends BaseStatefulWidget {
   //附件表格控制器
   final AccessoryGridViewController? controller;
@@ -71,6 +76,9 @@ class JAccessoryGridView extends BaseStatefulWidget {
   //附件项占位图表
   final Map<RegExp, Widget> itemPlaceholderMap;
 
+  //附件预览回调
+  final AccessoryPreview? accessoryPreview;
+
   const JAccessoryGridView({
     Key? key,
     required this.pickerMenuItems,
@@ -80,6 +88,7 @@ class JAccessoryGridView extends BaseStatefulWidget {
     this.addButton,
     this.deleteButton,
     this.itemBuilder,
+    this.accessoryPreview,
     int? maxCount,
     int? crossAxisCount,
     bool? canScroll,
@@ -94,7 +103,7 @@ class JAccessoryGridView extends BaseStatefulWidget {
   })  : maxCount = maxCount ?? 9,
         crossAxisCount = crossAxisCount ?? 4,
         canScroll = canScroll ?? true,
-        padding = padding ?? EdgeInsets.zero,
+        padding = padding ?? const EdgeInsets.all(8),
         mainAxisSpacing = mainAxisSpacing ?? 0.0,
         crossAxisSpacing = crossAxisSpacing ?? 0.0,
         deleteButtonAlign = deleteButtonAlign ?? Alignment.topRight,
@@ -127,11 +136,17 @@ class _JAccessGridViewState extends BaseState<JAccessoryGridView> {
             mainAxisSpacing: widget.mainAxisSpacing,
             crossAxisSpacing: widget.crossAxisSpacing,
             crossAxisCount: widget.crossAxisCount,
-            children: List.generate(dataList.length, (index) {
-              if (isAddButton(index)) {
-                return _buildGridAdd(context, index);
-              }
-              return _buildGridItem(context, dataList[index], index);
+            children: List.generate(dataLength, (index) {
+              return StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: 1,
+                child: Builder(builder: (_) {
+                  if (isAddButton(index)) {
+                    return _buildGridAdd(context, index);
+                  }
+                  return _buildGridItem(context, dataList[index], index);
+                }),
+              );
             }),
           ),
         );
@@ -156,8 +171,7 @@ class _JAccessGridViewState extends BaseState<JAccessoryGridView> {
                     _buildGridItemDef(context, item, index),
                 onTap: () {
                   widget.itemTap?.call(item, index);
-                  ///待实现
-                  // _onFilePreview(item, index);
+                  _doFilePreview(item, index);
                 },
                 onLongPress: null != widget.itemLongPress
                     ? () => widget.itemLongPress!(item, index)
@@ -199,6 +213,26 @@ class _JAccessGridViewState extends BaseState<JAccessoryGridView> {
         size: 55,
         color: Colors.black26,
       ),
+    );
+  }
+
+  //执行附件预览操作
+  void _doFilePreview(JFile item, int index) {
+    var values = controller.value;
+    if (null != widget.accessoryPreview) {
+      return widget.accessoryPreview!(values, index);
+    }
+    JPreviewUtil.preview(
+      items: values.map<PreviewOptionItem>((e) {
+        var type = PreviewType.other;
+        if (e.isImageType) {
+          type = PreviewType.image;
+        } else if (e.isVideoType) {
+          type = PreviewType.video;
+        }
+        return PreviewOptionItem(type: type, file: e);
+      }).toList(),
+      initialIndex: index,
     );
   }
 
