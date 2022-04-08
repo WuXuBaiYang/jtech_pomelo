@@ -28,7 +28,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {}
 
 /*
 * 无状态组件基类
-* @author jtechjh
+* @author JTech JH
 * @Time 2021/8/12 5:27 下午
 */
 abstract class BaseStatelessWidget extends StatelessWidget {
