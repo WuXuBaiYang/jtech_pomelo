@@ -74,6 +74,15 @@ dependencies:
   # 字体/图标库
   font_awesome_flutter: ^10.1.0
 
+  # 功能执行
+  url_launcher: ^6.0.20
+
+  # android ota更新
+  flutter_xupdate: ^2.0.2
+
+  # 包信息
+  package_info_plus: ^1.4.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

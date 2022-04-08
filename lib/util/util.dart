@@ -1,8 +1,8 @@
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jtech_pomelo/manage/event.dart';
 import 'package:jtech_pomelo/model/theme_event.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart' as path;
 import 'dart:convert';
 import 'dart:math';
@@ -44,6 +44,30 @@ class JUtil {
   //获取应用主题色
   static Color getAccentColor(BuildContext context) =>
       Theme.of(context).colorScheme.primary;
+
+  //获取应用名
+  static Future<String> get appName async {
+    var packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.appName;
+  }
+
+  //获取应用包名
+  static Future<String> get packageName async {
+    var packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.packageName;
+  }
+
+  //获取版本号
+  static Future<String> get buildNumber async {
+    var packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.buildNumber;
+  }
+
+  //获取版本名
+  static Future<String> get version async {
+    var packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 }
 
 //debug模式状态

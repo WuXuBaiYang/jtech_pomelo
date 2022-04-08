@@ -45,6 +45,7 @@ export 'util/sheet_util.dart';
 export 'util/snack_util.dart';
 export 'util/timer_util.dart';
 export 'util/toast_util.dart';
+export 'util/update_util.dart';
 export 'util/util.dart';
 
 //组件
@@ -99,3 +100,4 @@ export 'package:pull_to_refresh/src/indicator/bezier_indicator.dart';
 export 'package:pull_to_refresh/src/internals/refresh_localizations.dart';
 export 'package:azlistview/src/index_bar.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
+export 'package:url_launcher/url_launcher.dart';
