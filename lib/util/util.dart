@@ -86,6 +86,17 @@ String toQueryUrl(String url, Map<String, dynamic> params) {
   return url;
 }
 
+//map深层路径索引
+V? findInMap<V>(Map map, String path) {
+  var paths = path.split(".");
+  dynamic temp = map;
+  for (var it in paths) {
+    temp = temp[it];
+    if (null == temp) return null;
+  }
+  return temp as V;
+}
+
 //地址路径拼接
 String join(String part1,
         [String? part2,

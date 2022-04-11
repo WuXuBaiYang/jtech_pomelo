@@ -149,6 +149,6 @@ Future<void> runJAppRoot({
   //执行页面加载
   var targetPage = await pageLoad?.call();
   if (null != targetPage) {
-    jRouter.pushReplacement((_, anim, secAnim) => homePage);
+    jRouter.pushReplacement((_, anim, secAnim) => targetPage);
   }
 }
