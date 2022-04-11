@@ -192,6 +192,7 @@ abstract class BaseJAPI {
       response = await onRequest;
     } on DioError catch (e) {
       response = e.response;
+      rethrow;
     }
     return responseHandle(response);
   }

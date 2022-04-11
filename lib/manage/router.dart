@@ -14,15 +14,27 @@ class JRouter extends BaseManage {
   //全局路由key
   final GlobalKey<NavigatorState> navigateKey;
 
+  RouteTransitionsBuilder? _transitionsBuilder;
+
   JRouter._internal()
       : navigateKey = GlobalKey(debugLabel: 'JRouterNavigateKey');
 
   //获取路由对象
   NavigatorState? get navigator => navigateKey.currentState;
 
+  //设置基础参数
+  Future<void> setup({
+    RouteTransitionsBuilder? transitionsBuilder,
+  }) async {
+    _transitionsBuilder = transitionsBuilder;
+  }
+
   //获取页面参数
   V? find<V>(BuildContext context, String key, {V? def}) {
-    var arguments = ModalRoute.of(context)?.settings.arguments;
+    var arguments = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments;
     if (arguments is Map) {
       return arguments[key] ?? def;
     }
@@ -30,8 +42,7 @@ class JRouter extends BaseManage {
   }
 
   //页面跳转
-  Future<T?>? push<T>(
-    RoutePageBuilder builder, {
+  Future<T?>? push<T>(RoutePageBuilder builder, {
     String? name,
     Object? arguments,
     bool? opaque,
@@ -66,8 +77,7 @@ class JRouter extends BaseManage {
   }
 
   //页面跳转并移除到目标页面
-  Future<T?>? pushAndRemoveUntil<T>(
-    RoutePageBuilder builder, {
+  Future<T?>? pushAndRemoveUntil<T>(RoutePageBuilder builder, {
     required untilPath,
     String? name,
     Object? arguments,
@@ -107,8 +117,7 @@ class JRouter extends BaseManage {
   }
 
   //跳转页面并一直退出到目标页面
-  Future<T?>? pushReplacement<T, TO>(
-    RoutePageBuilder builder, {
+  Future<T?>? pushReplacement<T, TO>(RoutePageBuilder builder, {
     String? name,
     Object? arguments,
     bool? opaque,
@@ -167,9 +176,9 @@ class JRouter extends BaseManage {
     bool fullscreenDialog = false,
   }) {
     //默认值
-    transitionsBuilder ??= _defTransitionsBuilderWidget;
-    transitionDuration ??= const Duration(milliseconds: 300);
-    reverseTransitionDuration ??= const Duration(milliseconds: 300);
+    transitionsBuilder ??= _transitionsBuilder ?? _defTransitionsBuilderWidget;
+    transitionDuration ??= const Duration(milliseconds: 350);
+    reverseTransitionDuration ??= const Duration(milliseconds: 350);
     opaque ??= true;
     barrierDismissible ??= false;
     return PageRouteBuilder<T>(
@@ -189,8 +198,7 @@ class JRouter extends BaseManage {
   }
 
   //默认页面过渡动画
-  Widget _defTransitionsBuilderWidget(
-      BuildContext context,
+  Widget _defTransitionsBuilderWidget(BuildContext context,
       Animation<double> animation,
       Animation<double> secondaryAnimation,
       Widget child) {

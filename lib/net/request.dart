@@ -28,21 +28,21 @@ class RequestModel extends BaseModel {
     required Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
   }) : this(
-          parameters: parameters,
-          headers: headers,
-          data: null,
-        );
+    parameters: parameters,
+    headers: headers,
+    data: null,
+  );
 
   //构造为消息体格式
   const RequestModel.body({
     required dynamic data,
-    required Map<String, dynamic>? parameters,
+    Map<String, dynamic>? parameters,
     Map<String, dynamic>? headers,
   }) : this(
-          parameters: parameters,
-          headers: headers,
-          data: data,
-        );
+    parameters: parameters,
+    headers: headers,
+    data: data,
+  );
 
   //表单构建模式
   static RequestFormBuilder form({
@@ -68,45 +68,47 @@ class RequestFormBuilder extends RequestModel {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? data,
   }) : super(
-            parameters: parameters,
-            headers: headers,
-            data: FormData.fromMap(data ?? {}));
+      parameters: parameters,
+      headers: headers,
+      data: FormData.fromMap(data ?? {}));
 
   //添加参数
   RequestFormBuilder add(String key, dynamic value) =>
-      this..addAll({key: value});
+      this
+        ..addAll({key: value});
 
   //添加多个参数
-  RequestFormBuilder addAll(Map<String, dynamic> data) => this
-    ..data.fields.addAll(
-        data.map((key, value) => MapEntry(key, value.toString())).entries);
+  RequestFormBuilder addAll(Map<String, dynamic> data) =>
+      this
+        ..data.fields.addAll(
+            data
+                .map((key, value) => MapEntry(key, value.toString()))
+                .entries);
 
   //添加文件
-  RequestFormBuilder addFileSync(
-    String key,
-    String filePath, {
-    String? filename,
-    MediaType? mediaType,
-  }) {
+  RequestFormBuilder addFileSync(String key,
+      String filePath, {
+        String? filename,
+        MediaType? mediaType,
+      }) {
     return this
       ..data.files.add(MapEntry(
-            key,
-            MultipartFile.fromFileSync(
-              filePath,
-              filename: filename,
-              contentType: mediaType,
-            ),
-          ));
+        key,
+        MultipartFile.fromFileSync(
+          filePath,
+          filename: filename,
+          contentType: mediaType,
+        ),
+      ));
   }
 
   //添加多个文件
-  RequestFormBuilder addFilesSync(
-    String key,
-    List<RequestFileItem> files,
-  ) =>
+  RequestFormBuilder addFilesSync(String key,
+      List<RequestFileItem> files,) =>
       this
         ..data.files.addAll(files
-            .map((item) => MapEntry(
+            .map((item) =>
+            MapEntry(
                 key,
                 MultipartFile.fromFileSync(
                   item.filePath,

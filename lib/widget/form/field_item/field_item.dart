@@ -276,6 +276,7 @@ abstract class JFormFieldState<V, T extends JFormField> extends BaseState<T> {
         null == requiredTag) return null;
     return Row(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text.rich(
           TextSpan(

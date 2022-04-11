@@ -17,7 +17,9 @@ import './data_util.dart';
 class JUtil {
   //生成id
   static String genID({int? seed}) {
-    var time = DateTime.now().millisecondsSinceEpoch;
+    var time = DateTime
+        .now()
+        .millisecondsSinceEpoch;
     return md5("${time}_${Random(seed ?? time).nextDouble()}");
   }
 
@@ -31,19 +33,31 @@ class JUtil {
 
   //获取屏幕宽度
   static double getScreenWith(BuildContext context) =>
-      MediaQuery.of(context).size.width;
+      MediaQuery
+          .of(context)
+          .size
+          .width;
 
   //获取屏幕高度
   static double getScreenHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height;
+      MediaQuery
+          .of(context)
+          .size
+          .height;
 
   //获取状态栏高度
   static double getStatusBarHeight(BuildContext context) =>
-      MediaQuery.of(context).padding.top;
+      MediaQuery
+          .of(context)
+          .padding
+          .top;
 
   //获取应用主题色
   static Color getAccentColor(BuildContext context) =>
-      Theme.of(context).colorScheme.primary;
+      Theme
+          .of(context)
+          .colorScheme
+          .primary;
 
   //获取应用名
   static Future<String> get appName async {
@@ -88,6 +102,7 @@ String toQueryUrl(String url, Map<String, dynamic> params) {
 
 //map深层路径索引
 V? findInMap<V>(Map map, String path) {
+  if (path.isEmpty) return map as V;
   var paths = path.split(".");
   dynamic temp = map;
   for (var it in paths) {
@@ -99,14 +114,22 @@ V? findInMap<V>(Map map, String path) {
 
 //地址路径拼接
 String join(String part1,
-        [String? part2,
-        String? part3,
-        String? part4,
-        String? part5,
-        String? part6,
-        String? part7,
-        String? part8]) =>
-    path.join(part1, part2, part3, part4, part5, part6, part7, part8);
+    [String? part2,
+      String? part3,
+      String? part4,
+      String? part5,
+      String? part6,
+      String? part7,
+      String? part8]) =>
+    path.join(
+        part1,
+        part2,
+        part3,
+        part4,
+        part5,
+        part6,
+        part7,
+        part8);
 
 //地址路径拼接
 String joinAll(Iterable<String> parts) => path.joinAll(parts);
