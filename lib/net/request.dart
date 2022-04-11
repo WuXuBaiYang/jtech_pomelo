@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:jtech_pomelo/base/base_model.dart';
 
-
 /*
 * 请求对象实体
 * @author JTech JH
@@ -18,24 +17,32 @@ class RequestModel extends BaseModel {
   //消息体
   final dynamic data;
 
-  RequestModel({
+  const RequestModel({
     this.parameters,
     this.headers,
     this.data,
   });
 
   //构造为查询格式
-  RequestModel.query({
-    required this.parameters,
-    this.headers,
-  }) : data = null;
+  const RequestModel.query({
+    required Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+  }) : this(
+          parameters: parameters,
+          headers: headers,
+          data: null,
+        );
 
   //构造为消息体格式
-  RequestModel.body({
-    required this.data,
-    this.parameters,
-    this.headers,
-  });
+  const RequestModel.body({
+    required dynamic data,
+    required Map<String, dynamic>? parameters,
+    Map<String, dynamic>? headers,
+  }) : this(
+          parameters: parameters,
+          headers: headers,
+          data: data,
+        );
 
   //表单构建模式
   static RequestFormBuilder form({

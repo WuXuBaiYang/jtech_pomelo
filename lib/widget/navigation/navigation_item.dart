@@ -22,7 +22,7 @@ class NavigationItem extends BaseModel {
   //选中状态子项图标
   final Widget? activeIcon;
 
-  NavigationItem({
+  const NavigationItem({
     required this.page,
     this.title,
     Widget? activeTitle,

@@ -27,7 +27,7 @@ class IOSNotificationConfig extends BaseModel {
   //线程标识
   final String? threadIdentifier;
 
-  IOSNotificationConfig({
+  const IOSNotificationConfig({
     this.presentAlert,
     this.presentBadge,
     this.presentSound,

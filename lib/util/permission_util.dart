@@ -384,7 +384,7 @@ class PermissionRequest extends BaseModel {
   }
 
   //日历权限
-  PermissionRequest.calendar({
+  const PermissionRequest.calendar({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.calendar,
@@ -392,7 +392,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "日历权限请求失败";
 
   //摄像头权限
-  PermissionRequest.camera({
+  const PermissionRequest.camera({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.camera,
@@ -400,7 +400,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "摄像头权限请求失败";
 
   //请求通讯录权限
-  PermissionRequest.contacts({
+  const PermissionRequest.contacts({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.contacts,
@@ -408,7 +408,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "通讯录权限请求失败";
 
   //请求定位权限(locationAlways、locationWhenInUse)
-  PermissionRequest.location({
+  const PermissionRequest.location({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.location,
@@ -416,7 +416,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "定位权限请求失败";
 
   //请求麦克风权限
-  PermissionRequest.microphone({
+  const PermissionRequest.microphone({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.microphone,
@@ -424,7 +424,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "麦克风权限请求失败";
 
   //请求传感器权限
-  PermissionRequest.sensors({
+  const PermissionRequest.sensors({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.sensors,
@@ -432,7 +432,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "传感器权限请求失败";
 
   //请求麦克风权限
-  PermissionRequest.speech({
+  const PermissionRequest.speech({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.speech,
@@ -440,7 +440,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "麦克风权限请求失败";
 
   //请求存储权限
-  PermissionRequest.storage({
+  const PermissionRequest.storage({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.storage,
@@ -448,7 +448,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "存储权限请求失败";
 
   //请求通知权限
-  PermissionRequest.notification({
+  const PermissionRequest.notification({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.notification,
@@ -456,7 +456,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "通知权限请求失败";
 
   //请求蓝牙权限
-  PermissionRequest.bluetooth({
+  const PermissionRequest.bluetooth({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.bluetooth,
@@ -464,7 +464,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "蓝牙权限请求失败";
 
   //请求媒体库权限
-  PermissionRequest.iosMediaLibrary({
+  const PermissionRequest.iosMediaLibrary({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.mediaLibrary,
@@ -472,7 +472,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "媒体库权限请求失败";
 
   //请求图片库权限
-  PermissionRequest.iosPhotos({
+  const PermissionRequest.iosPhotos({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.photos,
@@ -480,7 +480,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "图片库权限请求失败";
 
   //请求提醒事项权限
-  PermissionRequest.iosReminders({
+  const PermissionRequest.iosReminders({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.reminders,
@@ -488,7 +488,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "提醒事项权限请求失败";
 
   //请求外部存储权限
-  PermissionRequest.androidManageExternalStorage({
+  const PermissionRequest.androidManageExternalStorage({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.bluetooth,
@@ -496,7 +496,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "外部存储权限请求失败";
 
   //请求系统通知权限
-  PermissionRequest.androidSystemAlertWindow({
+  const PermissionRequest.androidSystemAlertWindow({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.systemAlertWindow,
@@ -504,7 +504,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "系统通知权限请求失败";
 
   //请求安装包权限
-  PermissionRequest.androidRequestInstallPackages({
+  const PermissionRequest.androidRequestInstallPackages({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.requestInstallPackages,
@@ -512,7 +512,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "安装包权限请求失败";
 
   //请求短信权限
-  PermissionRequest.androidSms({
+  const PermissionRequest.androidSms({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.sms,
@@ -520,7 +520,7 @@ class PermissionRequest extends BaseModel {
         requestFail = requestFail ?? "短信权限请求失败";
 
   //请求拨打电话权限
-  PermissionRequest.androidPhone({
+  const PermissionRequest.androidPhone({
     String? requestMessage,
     String? requestFail,
   })  : _permission = Permission.phone,
@@ -540,7 +540,7 @@ class PermissionResult extends BaseModel {
   //提示消息
   final String message;
 
-  PermissionResult.from(
+  const PermissionResult.from(
     PermissionStatus status, {
     this.message = "",
   }) : _status = status;

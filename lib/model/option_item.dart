@@ -15,7 +15,7 @@ class OptionItem extends BaseModel {
   //是否可用
   final bool enable;
 
-  OptionItem({
+  const OptionItem({
     required this.text,
     this.id,
     bool? enable,

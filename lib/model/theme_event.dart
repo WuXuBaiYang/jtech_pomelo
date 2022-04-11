@@ -10,5 +10,5 @@ class ThemeEvent extends EventModel {
   //全局样式
   final ThemeData themeData;
 
-  ThemeEvent({required this.themeData});
+  const ThemeEvent({required this.themeData});
 }

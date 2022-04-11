@@ -42,4 +42,6 @@ final jEvent = JEvent();
 * @author JTech JH
 * @Time 2022/3/17 14:15
 */
-abstract class EventModel extends BaseModel {}
+abstract class EventModel extends BaseModel {
+  const EventModel();
+}

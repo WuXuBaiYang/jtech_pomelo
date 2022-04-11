@@ -19,7 +19,7 @@ class ResponseModel<T> extends BaseModel {
   final bool success;
 
   //构建响应对象
-  ResponseModel({
+  const ResponseModel({
     required this.code,
     required this.message,
     required this.data,

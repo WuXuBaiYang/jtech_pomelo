@@ -63,7 +63,7 @@ class AndroidNotificationConfig extends BaseModel {
   //进度条无进度状态
   final bool indeterminate;
 
-  AndroidNotificationConfig({
+  const AndroidNotificationConfig({
     this.channelId,
     this.channelName,
     this.channelDescription,
