@@ -118,8 +118,18 @@ class _JFormFieldTextState extends JFormFieldState<String, JFormFieldText> {
   //输入框可视状态
   late bool obscureText = widget.obscureText ?? false;
 
+  //文本控制器
+  late TextEditingController textController;
+
   //清除按钮是否展示
   bool clear = false;
+
+  @override
+  void initState() {
+    super.initState();
+    //初始化输入框控制器
+    textController = TextEditingController(text: initialValue);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,9 +157,7 @@ class _JFormFieldTextState extends JFormFieldState<String, JFormFieldText> {
     FormValueChange<String> valueChange,
   ) {
     return TextField(
-      controller: TextEditingController(
-        text: f.value,
-      ),
+      controller: textController,
       readOnly: readOnly,
       enabled: enable,
       textAlign: widget.multiline ? TextAlign.start : widget.textAlign,
