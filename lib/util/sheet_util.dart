@@ -15,6 +15,9 @@ class JSheetUtil {
     required WidgetBuilder builder,
     AppBar? appBar,
     Widget? bottomNavigationBar,
+    Widget? floatingActionButton,
+    FloatingActionButtonLocation? floatingActionButtonLocation,
+    FloatingActionButtonAnimator? floatingActionButtonAnimator,
     //通用参数
     Color? backgroundColor,
     double? elevation,
@@ -40,6 +43,9 @@ class JSheetUtil {
       builder: (_) => Scaffold(
         bottomNavigationBar: bottomNavigationBar,
         backgroundColor: backgroundColor,
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: floatingActionButtonLocation,
+        floatingActionButtonAnimator: floatingActionButtonAnimator,
         appBar: appBar,
         body: builder(_),
       ),

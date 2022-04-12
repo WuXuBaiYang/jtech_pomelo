@@ -31,18 +31,16 @@ class JRouter extends BaseManage {
 
   //获取页面参数
   V? find<V>(BuildContext context, String key, {V? def}) {
-    var arguments = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments;
-    if (arguments is Map) {
-      return arguments[key] ?? def;
+    dynamic temp = ModalRoute.of(context)?.settings.arguments;
+    if (temp is Map) {
+      temp = temp[key] ?? def;
     }
-    return arguments as V;
+    return null != temp ? temp as V : temp;
   }
 
   //页面跳转
-  Future<T?>? push<T>(RoutePageBuilder builder, {
+  Future<T?>? push<T>(
+    RoutePageBuilder builder, {
     String? name,
     Object? arguments,
     bool? opaque,
@@ -77,7 +75,8 @@ class JRouter extends BaseManage {
   }
 
   //页面跳转并移除到目标页面
-  Future<T?>? pushAndRemoveUntil<T>(RoutePageBuilder builder, {
+  Future<T?>? pushAndRemoveUntil<T>(
+    RoutePageBuilder builder, {
     required untilPath,
     String? name,
     Object? arguments,
@@ -117,7 +116,8 @@ class JRouter extends BaseManage {
   }
 
   //跳转页面并一直退出到目标页面
-  Future<T?>? pushReplacement<T, TO>(RoutePageBuilder builder, {
+  Future<T?>? pushReplacement<T, TO>(
+    RoutePageBuilder builder, {
     String? name,
     Object? arguments,
     bool? opaque,
@@ -198,7 +198,8 @@ class JRouter extends BaseManage {
   }
 
   //默认页面过渡动画
-  Widget _defTransitionsBuilderWidget(BuildContext context,
+  Widget _defTransitionsBuilderWidget(
+      BuildContext context,
       Animation<double> animation,
       Animation<double> secondaryAnimation,
       Widget child) {

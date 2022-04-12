@@ -84,8 +84,7 @@ class _JAppRootState extends BaseState<JAppRoot> {
       navigatorKey: widget.navigatorKey,
       theme: _themeData,
       locale: widget.locale,
-      //调试模式
-      debugShowCheckedModeBanner: debugMode,
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         RefreshLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -249,13 +249,6 @@ abstract class JFormFieldState<V, T extends JFormField> extends BaseState<T> {
   //获取容器样式
   InputDecoration createDecoration({bool withFixedStyle = true}) {
     var decoration = widget.decoration ?? const InputDecoration();
-    decoration = decoration.copyWith(
-      isCollapsed: true,
-      contentPadding: const EdgeInsets.all(15),
-      labelStyle: const TextStyle(
-        fontSize: 14,
-      ),
-    );
     if (!withFixedStyle) decoration;
     return decoration.copyWith(
       prefixIcon: buildStartChild(),
@@ -276,7 +269,6 @@ abstract class JFormFieldState<V, T extends JFormField> extends BaseState<T> {
         null == requiredTag) return null;
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text.rich(
           TextSpan(
