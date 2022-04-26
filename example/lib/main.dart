@@ -31,19 +31,25 @@ class _WelcomePageState extends BaseState<WelcomePage> {
   Widget build(BuildContext context) {
     return JAppPage(
       showAppbar: false,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.flutter_dash_rounded,
-              color: JUtil.getAccentColor(context),
-              size: 65,
-            ),
-            const SizedBox(height: 15),
-            const Text("Pomelo Demo"),
-          ],
-        ),
+      body: JListView<Map>(
+        enablePullDown: true,
+        enablePullUp: true,
+        refreshLoad: (pageIndex, pageSize, loadMore) {
+          return Future.delayed(const Duration(milliseconds: 2000))
+              .then((value) => [
+                    {
+                      "title": "第一项",
+                    },
+                    {
+                      "title": "第二项",
+                    }
+                  ]);
+        },
+        itemBuilder: (BuildContext context, item, int index) {
+          return ListTile(
+            title: Text(item["title"]),
+          );
+        },
       ),
     );
   }
