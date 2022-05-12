@@ -16,13 +16,13 @@ class PickerMenuItem extends JMenuItem {
   //是否使用前置摄像头
   final bool frontCamera;
 
-  //最大图片高度(图片选择生效)
+  //最大图片高度(图片拍摄有效)
   final double? maxWidth;
 
-  //最大图片宽度(图片选择生效)
+  //最大图片宽度(图片拍摄有效)
   final double? maxHeight;
 
-  //图片压缩比例
+  //图片压缩比例(图片拍摄有效)
   final int? imageQuality;
 
   //最大可选择视频长度

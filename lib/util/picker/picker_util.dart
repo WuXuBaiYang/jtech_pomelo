@@ -143,20 +143,10 @@ class JPickerUtil {
   static Future<dynamic> _pickFile(PickerMenuItem item, bool multiple) {
     switch (item.type) {
       case PickerType.image:
-        if (multiple) {
-          return ImagePicker().pickMultiImage(
-            maxWidth: item.maxWidth,
-            maxHeight: item.maxHeight,
-            imageQuality: item.imageQuality,
-          );
-        } else {
-          return ImagePicker().pickImage(
-            source: ImageSource.gallery,
-            maxWidth: item.maxWidth,
-            maxHeight: item.maxHeight,
-            imageQuality: item.imageQuality,
-          );
-        }
+        return FilePicker.platform.pickFiles(
+          type: FileType.image,
+          allowMultiple: multiple,
+        );
       case PickerType.imageTake:
         return ImagePicker().pickImage(
           source: ImageSource.camera,
@@ -167,16 +157,10 @@ class JPickerUtil {
               item.frontCamera ? CameraDevice.front : CameraDevice.rear,
         );
       case PickerType.video:
-        if (multiple) {
-          return FilePicker.platform.pickFiles(
-            type: FileType.video,
-            allowMultiple: multiple,
-          );
-        } else {
-          return ImagePicker().pickVideo(
-            source: ImageSource.gallery,
-          );
-        }
+        return FilePicker.platform.pickFiles(
+          type: FileType.video,
+          allowMultiple: multiple,
+        );
       case PickerType.videoRecord:
         return ImagePicker().pickVideo(
           source: ImageSource.camera,
