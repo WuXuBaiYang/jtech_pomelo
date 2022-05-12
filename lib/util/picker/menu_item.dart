@@ -6,7 +6,7 @@ import 'package:jtech_pomelo/model/menu_item.dart';
 * @author JTech JH
 * @Time 2022/3/29 16:47
 */
-class PickerMenuItem extends MenuItem {
+class PickerMenuItem extends JMenuItem {
   //选择类型
   final PickerType type;
 

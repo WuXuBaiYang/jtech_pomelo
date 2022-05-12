@@ -14,79 +14,79 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # 加密算法库
-  crypto: ^3.0.1
+  # 加密算法库(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
+  crypto: ^3.0.2
 
-  # 路径管理
-  path_provider: ^2.0.9
+  # 路径管理(ANDROID/IOS/LINUX/MACOS/WINDOWS)
+  path_provider: ^2.0.10
 
-  # 日志
+  # 日志(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   logger: ^1.1.0
 
-  # 权限管理
+  # 权限管理(ANDROID/IOS/WINDOWS)
   permission_handler: ^9.2.0
 
-  # 消息提示管理
+  # 消息提示管理(ANDROID/IOS/WEB)
   fluttertoast: ^8.0.9
 
-  # 数据存储管理
-  shared_preferences: ^2.0.13
+  # 数据存储管理(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
+  shared_preferences: ^2.0.15
 
-  # 本地通知栏管理
-  flutter_local_notifications: ^9.4.0
+  # 本地通知栏管理(ANDROID/IOS/LINUX/MACOS)
+  flutter_local_notifications: ^9.5.2
 
-  # 网络请求框架
-  dio: ^4.0.4
+  # 网络请求框架(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
+  dio: ^4.0.6
 
-  # 附件选择
+  # 附件选择(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   file_picker: ^4.5.1
 
-  # 图片视频选择
-  image_picker: ^0.8.4+11
+  # 图片视频选择(ANDROID/IOS/WEB)
+  image_picker: ^0.8.5+2
 
-  # 图片扩展
-  extended_image: ^6.0.2+1
+  # 图片扩展(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
+  extended_image: ^6.1.0
 
-  # 图片编辑
+  # 图片编辑(ANDROID/IOS)
   image_editor: ^1.0.2
 
-  # 视频播放器(对video_player的封装)
-  chewie: ^1.3.1
+  # 视频播放器(对video_player的封装)(ANDROID/IOS/WEB)
+  chewie: ^1.3.2
 
-  # 视频播放器
-  video_player: ^2.3.0
+  # 视频播放器(ANDROID/IOS/WEB)
+  video_player: ^2.4.2
 
-  # 图片压缩
+  # 图片压缩(ANDROID/IOS)
   flutter_image_compress: ^1.1.0
 
-  # 表格分割组件
+  # 表格分割组件(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   flutter_staggered_grid_view: ^0.6.1
 
-  # 刷新组件
+  # 刷新组件(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   pull_to_refresh: ^2.0.0
 
-  # 索引列表组件
+  # 索引列表组件(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   azlistview: ^2.0.0
 
-  # 拼音库
+  # 拼音库(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   lpinyin: ^2.0.3
 
-  # 字体/图标库
+  # 字体/图标库(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   font_awesome_flutter: ^10.1.0
 
-  # 功能执行
-  url_launcher: ^6.0.20
+  # 功能执行(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
+  url_launcher: ^6.1.2
 
-  # android ota更新
+  # android ota更新(ANDROID)
   flutter_xupdate: ^2.0.2
 
-  # 包信息
+  # 包信息(ANDROID/IOS/LINUX/MACOS/WEB/WINDOWS)
   package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

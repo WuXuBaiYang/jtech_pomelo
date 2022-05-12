@@ -90,7 +90,7 @@ class JNotificationManage extends BaseManage {
         ongoing: true,
         onlyAlertOnce: true,
       ),
-      iosConfig: IOSNotificationConfig(
+      iosConfig: const IOSNotificationConfig(
         presentSound: false,
         presentBadge: false,
       ),

@@ -6,7 +6,7 @@ import 'package:jtech_pomelo/model/option_item.dart';
 * @author JTech JH
 * @Time 2022/3/29 16:20
 */
-class MenuItem<V> extends OptionItem {
+class JMenuItem<V> extends OptionItem {
   //副标题
   final String? subText;
 
@@ -16,7 +16,7 @@ class MenuItem<V> extends OptionItem {
   //携带值
   final V? value;
 
-  MenuItem({
+  const JMenuItem({
     this.subText,
     this.icon,
     this.value,

@@ -91,7 +91,7 @@ class JSheetUtil {
   }
 
   //展示底部菜单弹窗
-  static Future<T?> showMenu<T extends MenuItem>(
+  static Future<T?> showMenu<T extends JMenuItem>(
     BuildContext context, {
     required List<T> menuItems,
     IndexedWidgetBuilder? separatorBuilder,

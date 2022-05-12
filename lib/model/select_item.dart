@@ -6,7 +6,7 @@ import 'package:jtech_pomelo/model/option_item.dart';
 * @Time 2022/4/6 16:10
 */
 class SelectItem extends OptionItem {
-  SelectItem({
+  const SelectItem({
     required String? id,
     required String text,
     bool? enable,
@@ -17,7 +17,7 @@ class SelectItem extends OptionItem {
         );
 
   //相同字段
-  SelectItem.same({
+  const SelectItem.same({
     required String text,
     bool? enable,
   }) : super(

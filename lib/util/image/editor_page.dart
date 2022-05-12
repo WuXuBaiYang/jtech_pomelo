@@ -162,11 +162,11 @@ class _ImageEditorPageState extends BaseState<ImageEditorPage> {
   };
 
   //展示裁剪菜单
-  Future<MenuItem?> _showCropMenu(BuildContext context) async {
-    return JSheetUtil.showMenu<MenuItem<double>>(
+  Future<JMenuItem?> _showCropMenu(BuildContext context) async {
+    return JSheetUtil.showMenu<JMenuItem<double>>(
       context,
-      menuItems: cropMap.entries.map<MenuItem<double>>((e) {
-        return MenuItem(
+      menuItems: cropMap.entries.map<JMenuItem<double>>((e) {
+        return JMenuItem(
           text: e.key,
           icon: _buildRatioItem(
             ratio: e.value,
